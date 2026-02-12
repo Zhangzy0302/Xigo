@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct XigoApp: App {
+    @StateObject private var xigoNavi: UxzuaNaaviManer = UxzuaNaaviManer()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            UxzuaXigoRouterStack()
+                .environmentObject(xigoNavi)
         }
     }
 }

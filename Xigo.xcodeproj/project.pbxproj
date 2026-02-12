@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DDAE65922F3D7A8000266F7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDAE65912F3D7A8000266F7A /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DDAE65802F3D746000266F7A /* Xigo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xigo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDAE65912F3D7A8000266F7A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		DDAE65772F3D746000266F7A = {
 			isa = PBXGroup;
 			children = (
+				DDAE65912F3D7A8000266F7A /* LaunchScreen.storyboard */,
 				DDAE65822F3D746000266F7A /* Xigo */,
 				DDAE65812F3D746000266F7A /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDAE65922F3D7A8000266F7A /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
