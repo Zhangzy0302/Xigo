@@ -1,13 +1,28 @@
 import SwiftUI
 
 enum UxzuaAppRoute: Hashable {
-    
+    case weytqxzSignPage
 }
 
 struct UxzuaXigoRouterStack: View {
+    @EnvironmentObject private var uxaiznNaviManner: UxzuaNaaviManer
+    
     var body: some View {
-        NavigationStack() {
+        NavigationStack(path: $uxaiznNaviManner.uzszuPath) {
             TrwyquGuidePage()
+        }.navigationDestination(for: UxzuaAppRoute.self) { route in
+            switch route {
+            case .weytqxzSignPage:
+                WeytqxzSignPage()
+            }
+        }
+        .onAppear{
+            for family in UIFont.familyNames {
+                print("Family:", family)
+                for name in UIFont.fontNames(forFamilyName: family) {
+                    print("   Font:", name)
+                }
+            }
         }
     }
 }
