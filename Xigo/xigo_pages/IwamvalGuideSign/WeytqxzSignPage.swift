@@ -64,7 +64,7 @@ struct WeytqxzSignPage: View {
                 }.padding(.top, 53)
                 Spacer()
             }.padding(.horizontal, 20)
-        }.navigationBarHidden(false)
+        }.navigationBarHidden(true)
     }
     
     struct WeytqxzSignTextfiled: View {

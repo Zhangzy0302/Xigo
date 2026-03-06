@@ -9,6 +9,9 @@ import SwiftUI
 
 struct TrwyquGuidePage: View {
     @AppStorage("ywxmhaiwIsAgree") var tryajkIsAgree: Bool = false
+    @EnvironmentObject var tywiazmNavi: UxzuaNaaviManer
+    
+    @State private var trwyquIsShowEula: Bool = false
     
     var body: some View {
         ZStack{
@@ -39,7 +42,9 @@ struct TrwyquGuidePage: View {
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(.white)
-                        ).padding(.top, 12)
+                        ).onTapGesture {
+                            trwyquIsShowEula = true
+                        }.padding(.top, 12)
                         .padding(.trailing, 20)
                 }
                 Spacer()
@@ -62,6 +67,18 @@ struct TrwyquGuidePage: View {
                                     .foregroundColor(.black)
                                     .frame(maxWidth: .infinity)
                             }.padding(.horizontal, 29)
+                        }.onTapGesture {
+                            if !YwxmhaiwAppState.ywxmhaiwIsEULAAgree {
+                                trwyquIsShowEula = true
+                                return
+                            }
+                            if !YwxmhaiwAppState.ywxmhaiwIsAgree {
+                                DwhaiXeuHUD.toast("Please read and agree to the agreement first")
+                                return
+                            }
+                            
+                            tywiazmNavi.push(UxzuaAppRoute.weytqxzSignPage)
+                            
                         }
                     RadialGradient(colors: [
                         Color(red: 1, green: 128 / 255, blue: 200 / 255),
@@ -99,22 +116,28 @@ struct TrwyquGuidePage: View {
                             Text("Terms of Service ")
                                 .font(XigexcTheme.XigoFont.xiabalMainFont(14))
                                 .underline()
+                                .onTapGesture {
+                                    tywiazmNavi.push(UxzuaAppRoute.uebzdxnzAgreement(uehvzUrl: "https://app.v88yoi1f.link/users"))
+                                }
                             Text("and")
                                 .font(XigexcTheme.XigoFont.xiabalMainFont(14))
                                 .underline()
                             Text(" Privacy Policy.")
                                 .font(XigexcTheme.XigoFont.xiabalMainFont(14))
                                 .underline()
+                                .onTapGesture {
+                                    tywiazmNavi.push(UxzuaAppRoute.uebzdxnzAgreement(uehvzUrl: "https://app.v88yoi1f.link/privacy"))
+                                }
                         }
                     }.foregroundColor(.white)
                     
                 }.padding(.bottom, 34)
             }
+            
+            XigOUWnalAHlkskDialog(xigousIsShow: $trwyquIsShowEula) {
+                YqalhhEULA(yqalhhIsShow: $trwyquIsShowEula)
+            }
         }
         
     }
-}
-
-#Preview {
-    TrwyquGuidePage()
 }

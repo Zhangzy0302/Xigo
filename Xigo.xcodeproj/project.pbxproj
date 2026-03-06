@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD6CAB722F5822EB004E4D67 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = DD6CAB712F5822EB004E4D67 /* ACarousel */; };
 		DDAE65922F3D7A8000266F7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDAE65912F3D7A8000266F7A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -15,9 +16,22 @@
 		DDAE65912F3D7A8000266F7A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DDEAA0A82F4E8C4900BC3937 /* Exceptions for "Xigo" folder in "Xigo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DDAE657F2F3D746000266F7A /* Xigo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DDAE65822F3D746000266F7A /* Xigo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DDEAA0A82F4E8C4900BC3937 /* Exceptions for "Xigo" folder in "Xigo" target */,
+			);
 			path = Xigo;
 			sourceTree = "<group>";
 		};
@@ -28,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6CAB722F5822EB004E4D67 /* ACarousel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +86,7 @@
 			);
 			name = Xigo;
 			packageProductDependencies = (
+				DD6CAB712F5822EB004E4D67 /* ACarousel */,
 			);
 			productName = Xigo;
 			productReference = DDAE65802F3D746000266F7A /* Xigo.app */;
@@ -100,6 +116,9 @@
 			);
 			mainGroup = DDAE65772F3D746000266F7A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DD6CAB702F5822EB004E4D67 /* XCRemoteSwiftPackageReference "ACarousel" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DDAE65812F3D746000266F7A /* Products */;
 			projectDirPath = "";
@@ -262,13 +281,14 @@
 				DEVELOPMENT_TEAM = 6NUFR97X3A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_FILE = Xigo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires the use of your camera to take photos and record videos. All the captured content will be securely stored on your personal device, and it will only be uploaded or shared with your explicit consent.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs to access your microphone to record audio for voice chat functionality. We will only access and use the recorded audio content with your explicit consent.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -294,13 +314,14 @@
 				DEVELOPMENT_TEAM = 6NUFR97X3A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_FILE = Xigo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires the use of your camera to take photos and record videos. All the captured content will be securely stored on your personal device, and it will only be uploaded or shared with your explicit consent.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs to access your microphone to record audio for voice chat functionality. We will only access and use the recorded audio content with your explicit consent.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -337,6 +358,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD6CAB702F5822EB004E4D67 /* XCRemoteSwiftPackageReference "ACarousel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JWAutumn/ACarousel";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD6CAB712F5822EB004E4D67 /* ACarousel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD6CAB702F5822EB004E4D67 /* XCRemoteSwiftPackageReference "ACarousel" */;
+			productName = ACarousel;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DDAE65782F3D746000266F7A /* Project object */;
 }
