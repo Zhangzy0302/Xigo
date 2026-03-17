@@ -2,76 +2,99 @@ import SwiftUI
 
 enum UxzuaAppRoute: Hashable {
     // guide
-    case weytqxzSignPage
+    case weytqxzSignPage(weaiuIsSignUp: Bool)
     case uebzdxnzAgreement(uehvzUrl: String)
     
     // user
-    case bnzjsjaAkUserPage
+    case bnzjsjaAkUserPage(bnaijzUserID: Int, bnjizIsMine: Bool)
     case oeuqunAlkjSetting
-    case wxznWyUserList
+    case wxznWyUserList(wxsaujListType: WxznawWaListType)
     case kahxuwaofWallet
+    case qawyaXmaEdit
+    
+    case iwynazReportPage
     
     // video
     case rpuqxAlkSharing
-    case uWxnazaAkalVideoDetail
-    case czlsiwPostVideo
+    case uWxnazaAkalVideoDetail(uWanaiVideoID: Int)
+    case czlsiwPostVideo(czlsiwIsVideo: Bool)
     
     // cos post
     case nabzjakALdaCosSharing
+    case fhweyaOueCosDetail(fhwuPostId: Int)
     
     // chat
     case tudaaWLjMessagePage
-    case mznajucChatRoom
+    case mznajucChatRoom(mzanRoomId: Int)
+    
+    // ai
+    case tteaijzaAICustomized
+    case ryEyxnaWaiResutl(scene: String, method: String, difficulty: String, acName: String)
 }
 
 struct UxzuaXigoRouterStack: View {
     @EnvironmentObject private var uxaiznNaviManner: UxzuaNaaviManer
     @EnvironmentObject private var uxzauUser: XawuxLAiwMUSerViewModel
+    private let storage = XigoAuwStorageManager.shared
     
     var body: some View {
         NavigationStack(path: $uxaiznNaviManner.uzszuPath) {
             Group {
-                if uxzauUser.currentUser != nil {
+                let kceuiakwxsa = storage.getCurrentUserId()
+                
+                if kceuiakwxsa != 7700 {
                     VbwualMAuwaHome()
                 }else{
                     TrwyquGuidePage()
                 }
-            }
-                .navigationDestination(for: UxzuaAppRoute.self) { route in
+            }.navigationDestination(for: UxzuaAppRoute.self) { route in
                     switch route {
                     // guide
-                    case .weytqxzSignPage:
-                        WeytqxzSignPage()
+                    case .weytqxzSignPage(let weaiuIsSignUp):
+                        WeytqxzSignPage(weyaiaIsSignUp: weaiuIsSignUp)
                     case .uebzdxnzAgreement(let uehvzUrl):
                         UEbzXNzaAgreement(urbzlxxnWebUrl: uehvzUrl)
                         
                     // user
-                    case .bnzjsjaAkUserPage:
-                        BnzjsjaAKwUserPage()
+                    case .bnzjsjaAkUserPage(let bnaijzUserID, let bnjizIsMine):
+                        BnzjsjaAKwUserPage(bnzjiaAkwUserID: bnaijzUserID, bnajiznaIsMinePage: bnjizIsMine)
                     case .oeuqunAlkjSetting:
                         OeuqnAhldSetting()
-                    case .wxznWyUserList:
-                        WxznaWYaUserList()
+                    case .wxznWyUserList(let wxsaujListType):
+                        WxznaWYaUserList(waxmaListType: wxsaujListType)
                     case .kahxuwaofWallet:
                         KahxuwaofWallet()
+                    case .qawyaXmaEdit:
+                        QawyaXmaEDit()
+                        
+                    case .iwynazReportPage:
+                        IwynzhReportPage()
                         
                     // video
-                    case .czlsiwPostVideo:
-                        CzlsiwPostVideo()
+                    case .czlsiwPostVideo(let czlsiwIsVideo):
+                        CzlsiwPostVideo(cznlisPostIsVideo: czlsiwIsVideo)
                     case .rpuqxAlkSharing:
                         RPuqxAldkSharing()
-                    case .uWxnazaAkalVideoDetail:
-                        UWxnaAKalVideoDetail()
+                    case .uWxnazaAkalVideoDetail(let uWanaiVideoID):
+                        UWxnaAKalVideoDetail(uwxnaAkVideoId: uWanaiVideoID)
                         
                     // cos post
                     case .nabzjakALdaCosSharing:
                         NVbzajaAldaCosShare()
+                    case .fhweyaOueCosDetail(let fhwuPostId):
+                        FhweyaOueCosDetail(fhweyaOuePostId: fhwuPostId)
                         
                     // chat
-                    case .mznajucChatRoom:
-                        MznaujucChatRoom()
+                    case .mznajucChatRoom(let mzanRoomId):
+                        MznaujucChatRoom(mznaujucRoomId: mzanRoomId)
                     case .tudaaWLjMessagePage:
                         TudaaWLjMessagePage()
+                        
+                    // ai
+                    case .tteaijzaAICustomized:
+                        TTeaijzaAiCustomized()
+                    case .ryEyxnaWaiResutl(let scene, let method, let difficulty, let acName):
+                        RYEyxnaWAIResult(ryeuxjScence: scene, ryeunaMethod: method, ruenDifficulty: difficulty, raucActivityName: acName)
                     }
                 }
         }
@@ -83,19 +106,29 @@ class UxzuaNaaviManer: ObservableObject {
     @Published var uzszuPath: NavigationPath = NavigationPath()
     @Published var uzlnaiIsShowDialog: Bool = false
     
+    @Published var uzlajShowBlock: Bool = false
+    @Published var uzlajBLockUserID: Int?
+    
+    func uznasShowBLock(_ blockUserId: Int) {
+        self.uzlajBLockUserID = blockUserId
+        withAnimation{
+            self.uzlajShowBlock = true
+        }
+    }
+    
     // 便捷方法：跳转到指定路由
     func push(_ route: UxzuaAppRoute) {
-        uzszuPath.append(route)
+        self.uzszuPath.append(route)
     }
     
     // 便捷方法：返回上一页
     func pop() {
-        uzszuPath.removeLast()
+        self.uzszuPath.removeLast()
     }
     
     // 便捷方法：返回根页面
     func popToRoot() {
-        uzszuPath.removeLast(uzszuPath.count)
+        self.uzszuPath = NavigationPath()
     }
 
 }

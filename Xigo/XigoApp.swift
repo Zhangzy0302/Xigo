@@ -15,21 +15,34 @@ struct XigoApp: App {
     @StateObject private var erwyAuwVideoViewModel: ErwyAuwVideoViewModel = ErwyAuwVideoViewModel()
     @StateObject private var sswzuLwoqxChatViewModel: SswzuLwoqxChatViewModel = SswzuLwoqxChatViewModel()
     @StateObject private var manuwqoAiCommentsViewModel: ManuwqoAiCommentsViewModel = ManuwqoAiCommentsViewModel()
+    @StateObject private var wuiqbahaCosPostsViewModel: WUiqbahCosPostsViewModel = WUiqbahCosPostsViewModel()
+    @StateObject private var iwhanxaIAPManager: IwhanxaIAPManager = IwhanxaIAPManager()
     
     var body: some Scene {
         WindowGroup {
-            UxzuaXigoRouterStack()
-                .environmentObject(xigoNavi)
+            ZStack{
+                UxzuaXigoRouterStack()
+                if xigoNavi.uzlajShowBlock {
+                    JayuwalReportBlock(jayuwalIsShowBlock: $xigoNavi.uzlajShowBlock)
+                        .transition(.opacity)
+                }
+                
+                DwhaiXeuHUDView()
+            }.ignoresSafeArea()
+            .environmentObject(xigoNavi)
                 .environmentObject(xawuxLAiwMUSerViewModel)
                 .environmentObject(erwyAuwVideoViewModel)
                 .environmentObject(sswzuLwoqxChatViewModel)
                 .environmentObject(manuwqoAiCommentsViewModel)
-                .overlay{
-                    DwhaiXeuHUDView()
-                }
+                .environmentObject(wuiqbahaCosPostsViewModel)
+                .environmentObject(iwhanxaIAPManager)
                 .onAppear{
                     XigoAuwStorageManager.shared.initializeAllDefaults()
+                    iwhanxaIAPManager.psieAJxaloietchProducts()
+                    xawuxLAiwMUSerViewModel.loadLoginXawuxLAiwMUser()
                 }
+            
+                
         }
     }
 }

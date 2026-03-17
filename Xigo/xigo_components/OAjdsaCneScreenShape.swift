@@ -25,22 +25,10 @@ struct OAjdsaCneScreenShape: Shape {
         )
         
         // 左边
-        path.addLine(to: CGPoint(x: 0, y: height - cornerRadius))
-        
-        // 左下圆角
-        path.addQuadCurve(
-            to: CGPoint(x: cornerRadius, y: height),
-            control: CGPoint(x: 0, y: height)
-        )
+        path.addLine(to: CGPoint(x: 0, y: height))
         
         // 底边
-        path.addLine(to: CGPoint(x: width - cornerRadius, y: height))
-        
-        // 右下圆角
-        path.addQuadCurve(
-            to: CGPoint(x: width, y: height - cornerRadius),
-            control: CGPoint(x: width, y: height)
-        )
+        path.addLine(to: CGPoint(x: width, y: height))
         
         // 右边
         path.addLine(to: CGPoint(x: width, y: cornerRadius))

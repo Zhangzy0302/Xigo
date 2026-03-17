@@ -10,6 +10,7 @@ import SwiftUI
 struct TrwyquGuidePage: View {
     @AppStorage("ywxmhaiwIsAgree") var tryajkIsAgree: Bool = false
     @EnvironmentObject var tywiazmNavi: UxzuaNaaviManer
+    @EnvironmentObject var tywaizUserVM: XawuxLAiwMUSerViewModel
     
     @State private var trwyquIsShowEula: Bool = false
     
@@ -54,6 +55,19 @@ struct TrwyquGuidePage: View {
                         .white
                     ], center: .center,startRadius: 0, endRadius: 30)
                     .frame(width: 242, height: 62)
+                    .onTapGesture {
+                        if !YwxmhaiwAppState.ywxmhaiwIsEULAAgree {
+                            trwyquIsShowEula = true
+                            return
+                        }
+                        if !YwxmhaiwAppState.ywxmhaiwIsAgree {
+                            DwhaiXeuHUD.toast(.normal("Please read and agree to the agreement first"))
+                            return
+                        }
+                        
+                        tywiazmNavi.push(UxzuaAppRoute.weytqxzSignPage(weaiuIsSignUp: false))
+                        
+                    }
                     .scaleEffect(x: 4.0, y: 1.0, anchor: .center)
                         .cornerRadius(33)
                         .shadow(color: .black, radius: 0, x: 0, y: 3 )
@@ -67,24 +81,30 @@ struct TrwyquGuidePage: View {
                                     .foregroundColor(.black)
                                     .frame(maxWidth: .infinity)
                             }.padding(.horizontal, 29)
-                        }.onTapGesture {
-                            if !YwxmhaiwAppState.ywxmhaiwIsEULAAgree {
-                                trwyquIsShowEula = true
-                                return
-                            }
-                            if !YwxmhaiwAppState.ywxmhaiwIsAgree {
-                                DwhaiXeuHUD.toast("Please read and agree to the agreement first")
-                                return
-                            }
-                            
-                            tywiazmNavi.push(UxzuaAppRoute.weytqxzSignPage)
-                            
                         }
                     RadialGradient(colors: [
                         Color(red: 1, green: 128 / 255, blue: 200 / 255),
                         .white
                     ], center: .center,startRadius: 0, endRadius: 30)
                     .frame(width: 242, height: 62)
+                    .onTapGesture {
+                        if !YwxmhaiwAppState.ywxmhaiwIsEULAAgree {
+                            trwyquIsShowEula = true
+                            return
+                        }
+                        if !YwxmhaiwAppState.ywxmhaiwIsAgree {
+                            DwhaiXeuHUD.toast(.normal("Please read and agree to the agreement first"))
+                            return
+                        }
+                        Task{@MainActor in
+                            DwhaiXeuHUD.showLoading(showBackground: true)
+                            await delay(0.6)
+                            DwhaiXeuHUD.hideLoading()
+                            tywaizUserVM.visitorLoginXawuxLAiwM()
+                        }
+                        
+                        
+                    }
                     .scaleEffect(x: 4.0, y: 1.0, anchor: .center)
                         .cornerRadius(33)
                         .shadow(color: .black, radius: 0, x: 0, y: 3 )
@@ -99,7 +119,29 @@ struct TrwyquGuidePage: View {
                                     .frame(maxWidth: .infinity)
                             }.padding(.horizontal, 29)
                         }
+                }
+                HStack(spacing: 0){
+                    Text("Don't have an account? ")
+                        .font(XigexcTheme.XigoFont.xiabalMainFont(14))
+                        .foregroundColor(.white)
+                    Text("Sign up")
+                        .font(XigexcTheme.XigoFont.xiabalMainFont(14, weight: .extraBold))
+                        .foregroundColor(.white)
+                        .onTapGesture {
+                            if !YwxmhaiwAppState.ywxmhaiwIsEULAAgree {
+                                trwyquIsShowEula = true
+                                return
+                            }
+                            if !YwxmhaiwAppState.ywxmhaiwIsAgree {
+                                DwhaiXeuHUD.toast(.normal("Please read and agree to the agreement first"))
+                                return
+                            }
+                            
+                            tywiazmNavi.push(UxzuaAppRoute.weytqxzSignPage(weaiuIsSignUp: true))
+                            
+                        }
                 }.padding(.bottom, 60)
+                    .padding(.top, 16)
                 HStack(alignment: .top){
                     Button(action: {
                       withAnimation(.easeInOut) {
@@ -137,7 +179,7 @@ struct TrwyquGuidePage: View {
             XigOUWnalAHlkskDialog(xigousIsShow: $trwyquIsShowEula) {
                 YqalhhEULA(yqalhhIsShow: $trwyquIsShowEula)
             }
-        }
+        }.navigationBarHidden(true)
         
     }
 }

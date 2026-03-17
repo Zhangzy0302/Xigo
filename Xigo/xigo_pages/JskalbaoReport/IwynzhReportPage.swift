@@ -11,6 +11,7 @@ struct IwynzhReportPage: View {
         "Cyber bullying"
     ]
     @State private var lwayChosenOne: String = ""
+    @EnvironmentObject var lwynzNavi: UxzuaNaaviManer
     
     var body: some View {
         ZStack(alignment: .top){
@@ -35,14 +36,30 @@ struct IwynzhReportPage: View {
                         Text(reson)
                             .font(XigexcTheme.XigoFont.xiabalMainFont(14))
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
+                            .foregroundColor((reson == lwayChosenOne) ? .black : .white)
                             .padding(.horizontal, 10)
                             .frame(height: 86)
                             .frame(maxWidth: .infinity)
                             .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(.black)
-                            )
+                                Group{
+                                    if reson == lwayChosenOne {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(.white)
+                                            .overlay{
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(XigexcTheme.XigoColor.xiabalMainPurple, lineWidth: 2)
+                                            }
+                                    }else {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(.black)
+                                    }
+                                }
+                                
+                            ).onTapGesture {
+                                withAnimation{
+                                    lwayChosenOne = reson
+                                }
+                            }
                     }
                 }.padding(.horizontal, 20)
                 VStack(alignment: .leading){
@@ -70,12 +87,19 @@ struct IwynzhReportPage: View {
                         Text("Confirm")
                             .font(XigexcTheme.XigoFont.xiabalMainFont(20))
                             .foregroundColor(.white)
+                    }.onTapGesture {
+                        if lwayChosenOne.isEmpty {
+                            DwhaiXeuHUD.toast(.error("Please select a reason for reporting"))
+                            return
+                        }
+                        lwynzNavi.pop()
+                        DwhaiXeuHUD.toast(.success("Report submitted successfully"))
                     }
             }
         }.navigationBarHidden(true)
+            .background(EnableSwipeBack())
+            .onTapGesture {
+                iwyaIsFocus = false
+            }
     }
-}
-
-#Preview {
-    IwynzhReportPage()
 }

@@ -25,7 +25,9 @@ struct OeuqnAhldSetting: View {
                 }.padding(.top, 20)
             }
             
-        }.overlay{
+        }.navigationBarHidden(true)
+            .background(EnableSwipeBack())
+            .overlay{
             XigOUWnalAHlkskDialog(
                 xigousIsShow: $oezShowDelete
             ) {
@@ -36,6 +38,7 @@ struct OeuqnAhldSetting: View {
     
     struct OeuxanSettingItem: View {
         @EnvironmentObject var xoanzlmManar: UxzuaNaaviManer
+        @EnvironmentObject var oeuqnaUserVM: XawuxLAiwMUSerViewModel
         @Binding var oezuShowDelete: Bool
         let oeuqunxcnaSettingIcons = [
             "klahgw_set_user_agreement",
@@ -59,9 +62,12 @@ struct OeuqnAhldSetting: View {
             case 1:
                 xoanzlmManar.push(UxzuaAppRoute.uebzdxnzAgreement(uehvzUrl: "https://app.v88yoi1f.link/privacy"))
             case 2:
-                xoanzlmManar.push(UxzuaAppRoute.wxznWyUserList)
+                xoanzlmManar.push(UxzuaAppRoute.wxznWyUserList(wxsaujListType: .xiwaBlacklsit))
             case 3:
                 oezuShowDelete = true
+            case 4:
+                oeuqnaUserVM.logoutXawuxLAiwM()
+                xoanzlmManar.popToRoot()
             default:
                 return
             }
@@ -86,10 +92,6 @@ struct OeuqnAhldSetting: View {
                 .onTapGesture {
                     oeainxzlOnTap(xoanIndex: oeuanxSettingIndex)
                 }
-        }.navigationBarHidden(true)
+        }
     }
-}
-
-#Preview {
-    OeuqnAhldSetting()
 }

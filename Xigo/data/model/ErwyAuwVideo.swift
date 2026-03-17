@@ -19,7 +19,7 @@ final class ErwyAuwVideoViewModel: ObservableObject {
 
   @Published var allWorks: [ErwyAuwVideo] = []
   @Published var allNotBlockWorks: [ErwyAuwVideo] = []
-  @Published var userWorks: [ErwyAuwVideo] = []
+//  @Published var userWorks: [ErwyAuwVideo] = []
   @Published var myFollowingUserWorks: [ErwyAuwVideo] = []
   @Published var workDetail: ErwyAuwVideo?
 
@@ -40,9 +40,9 @@ final class ErwyAuwVideoViewModel: ObservableObject {
 
   }
 
-  func getErwyAuwWorksByUserId(userId: Int) {
+  func getErwyAuwWorksByUserId(userId: Int) -> [ErwyAuwVideo] {
     let allPostWorks: [ErwyAuwVideo] = storage.getWorks()
-    userWorks = allPostWorks.filter {
+    return allPostWorks.filter {
       $0.erwyAuwCreatorId == userId && !$0.erwyAuwIsDeleted
     }
   }

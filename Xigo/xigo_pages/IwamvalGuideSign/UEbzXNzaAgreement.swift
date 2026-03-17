@@ -22,9 +22,13 @@ struct UEbzXNzaAgreement: View {
     let urbzlxxnWebUrl: String
     
     var body: some View {
-        VStack {
-            IEyabZHskTopBar()
-            AXaixlkalAJxlpWebView(urlString: urbzlxxnWebUrl)
+        ZStack{
+            Color.black.ignoresSafeArea()
+            VStack {
+                IEyabZHskTopBar()
+                AXaixlkalAJxlpWebView(urlString: urbzlxxnWebUrl)
+            }
         }.navigationBarHidden(true)
+            .background(EnableSwipeBack())
     }
 }

@@ -1,8 +1,17 @@
 import SwiftUI
+import PhotosUI
 
 struct QawyaXmaEDit: View {
+    
+    @State private var qawyXmaUserAvatar = ""
     @State private var qawayText: String = ""
     @FocusState private var qawayIsFocus: Bool
+    
+    @EnvironmentObject var qaawnzUserVm: XawuxLAiwMUSerViewModel
+    @EnvironmentObject var qzaliNavi: UxzuaNaaviManer
+    
+    @State private var selectedItem: PhotosPickerItem?
+    @State private var tjriwncAJShowAvatarPicker = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -27,9 +36,9 @@ struct QawyaXmaEDit: View {
                         Circle()
                             .stroke(.white.opacity(0.7), lineWidth: 1)
                             .frame(width: 98, height: 98)
-                        Circle()
-                            .fill(.white)
-                            .frame(width: 82, height: 82)
+                        SkahwuLwXImage(SkahwuLwXImageUrl: qawyXmaUserAvatar, SkahwuLwXWidth: 84, SkahwuLwXHeight: 84, SkahwuLwXIsCircle: true, SkahwuLwXCircleColor: .white, SkahwuLwXCircleWidth: 2)
+                    }.onTapGesture {
+                        tjriwncAJShowAvatarPicker = true
                     }
                     Image("xnwuAkuwaka")
                         .resizable()
@@ -66,16 +75,47 @@ struct QawyaXmaEDit: View {
                             Text("Save")
                                 .font(XigexcTheme.XigoFont.xiabalMainFont(20, weight: .semiBold))
                                 .foregroundColor(.white)
+                        }.onTapGesture {
+                            if qawayText.isEmpty {
+                                DwhaiXeuHUD.toast(.error("Username is required"))
+                                return
+                            }
+                            qaawnzUserVm.editXawuxLAiwMUserInfo(name: qawayText, avatar: qawyXmaUserAvatar)
+                            DwhaiXeuHUD.toast(.success("Save successful"))
+                            qzaliNavi.pop()
                         }.padding(.bottom, 40)
                 }
                 
             }
         }.onTapGesture {
             qawayIsFocus = false
-        }.navigationBarHidden(true)
+        }.photosPicker(
+            isPresented: $tjriwncAJShowAvatarPicker,
+            selection: $selectedItem,
+            matching: .images
+        )
+        .onChange(of: selectedItem) { item in
+            guard let item else { return }
+            
+            Task {
+                if let data = try? await item.loadTransferable(type: Data.self),
+                   let image = UIImage(data: data) {
+                    
+                    // 1️⃣ 保存到本地
+                    if let localPath = XigoLocalImageManager.saveXigoImage(image) {
+                        qawyXmaUserAvatar = localPath   // ✅ 赋值给头像
+                    }
+                }
+            }
+        }
+        .navigationBarHidden(true)
+            .background(EnableSwipeBack())
+            .onAppear{
+                if let qamdMine = qaawnzUserVm.currentUser {
+                    qawyXmaUserAvatar = qamdMine.xawuxLAiwMAvatar
+                    qawayText = qamdMine.xawuxLAiwMUserName
+                }
+                
+            }
     }
-}
-
-#Preview {
-    QawyaXmaEDit()
 }

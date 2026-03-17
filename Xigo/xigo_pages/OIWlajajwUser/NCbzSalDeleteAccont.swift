@@ -2,6 +2,15 @@ import SwiftUI
 
 struct NCbzSalDeleteAccont: View {
     @Binding var ncbnaSaIsShow: Bool
+    
+    @EnvironmentObject var ncvhahUserVM: XawuxLAiwMUSerViewModel
+    @EnvironmentObject var ncajaxmVIdeoVM: ErwyAuwVideoViewModel
+    @EnvironmentObject var ncauzPostVM: WUiqbahCosPostsViewModel
+    @EnvironmentObject var nabsjAMChatVM: SswzuLwoqxChatViewModel
+    @EnvironmentObject var nacbaMaCOmmentVM: ManuwqoAiCommentsViewModel
+    
+    @EnvironmentObject var nvcajNavi: UxzuaNaaviManer
+    
     var body: some View {
         ZStack(alignment: .top){
             RoundedRectangle(cornerRadius: 20)
@@ -28,6 +37,22 @@ struct NCbzSalDeleteAccont: View {
                                     Text("Sure")
                                         .font(XigexcTheme.XigoFont.xiabalMainFont(14, weight: .extraBold))
                                         .foregroundColor(.white)
+                                }.onTapGesture {
+                                    let ncvSaiwUserID = ncvhahUserVM.currentUserID
+                                    Task{
+                                        DwhaiXeuHUD.showLoading(showBackground: true)
+                                        await delay(2)
+                                        DwhaiXeuHUD.hideLoading()
+                                        ncauzPostVM.softDeletePostsByUserId(ncvSaiwUserID)
+                                        ncajaxmVIdeoVM.deleteMyErwyAuwWorks()
+                                        nacbaMaCOmmentVM.deleteManuwqoAiCommentItem()
+                                        nabsjAMChatVM.markAllMyChatRoomsAsDeleted()
+                                        ncvhahUserVM.deleteAccountXawuxLAiwM()
+                                        
+                                        nvcajNavi.popToRoot()
+                                    }
+                                    
+                                    
                                 }
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(XigexcTheme.XigoColor.xiabalMainPurple)

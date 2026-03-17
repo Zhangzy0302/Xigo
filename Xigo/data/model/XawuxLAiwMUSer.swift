@@ -11,7 +11,8 @@ struct XawuxLAiwMUSer: Codable, Identifiable, Equatable {
   var xawuxLAiwMFans: [Int]
   var xawuxLAiwMBlacklist: [Int]
   var xawuxLAiwMWalletBalance: Int
-  var xawuxLAiwMLikeWorks: [Int]
+  var xawuxLAiwMLikeVideos: [Int]
+    var xawuxLAiwMLikePosts: [Int]
   var xawuxLAiwMIsDeleted: Bool
 
   // MARK: - Identifiable
@@ -24,6 +25,7 @@ final class XawuxLAiwMUSerViewModel: ObservableObject {
   @Published var users: [XawuxLAiwMUSer] = []
   @Published var currentUser: XawuxLAiwMUSer?
   @Published var userInfo: XawuxLAiwMUSer?
+    @Published var currentUserID: Int = 7700
 
   private let storage = XigoAuwStorageManager.shared
 
@@ -39,6 +41,7 @@ final class XawuxLAiwMUSerViewModel: ObservableObject {
     users = storage.getUsers()
 
     let uid: Int = storage.getCurrentUserId()
+      currentUserID = uid
     currentUser = users.first { $0.xawuxLAiwMUserId == uid }
   }
 
@@ -55,28 +58,31 @@ final class XawuxLAiwMUSerViewModel: ObservableObject {
 
     // 记录登录态
     storage.setCurrentUserId(matchUser.xawuxLAiwMUserId)
+      currentUserID = matchUser.xawuxLAiwMUserId
     loadLoginXawuxLAiwMUser()
     return matchUser
   }
 
   // 游客登录
   func visitorLoginXawuxLAiwM() {
-    storage.setCurrentUserId(6)
+    storage.setCurrentUserId(8)
+      currentUserID = 8
     loadLoginXawuxLAiwMUser()
   }
 
   // 删除账号
   func deleteAccountXawuxLAiwM() {
-    if storage.getCurrentUserId() == 6 {
-      storage.updateUser(uid: 6) { user in
+    if storage.getCurrentUserId() == 8 {
+      storage.updateUser(uid: 8) { user in
         var newUser: XawuxLAiwMUSer = user
         newUser.xawuxLAiwMUserName = "Visitor_00" + "\(Int.random(in: 20...100))"
-        newUser.xawuxLAiwMAvatar = "cponlzna_default_avatar"
+        newUser.xawuxLAiwMAvatar = "cukan_default"
         newUser.xawuxLAiwMFollowing = []
         newUser.xawuxLAiwMFans = []
         newUser.xawuxLAiwMBlacklist = []
         newUser.xawuxLAiwMWalletBalance = 0
-        newUser.xawuxLAiwMLikeWorks = []
+        newUser.xawuxLAiwMLikeVideos = []
+          newUser.xawuxLAiwMLikePosts = []
         newUser.xawuxLAiwMIsDeleted = false
         return newUser
       }
@@ -85,6 +91,7 @@ final class XawuxLAiwMUSerViewModel: ObservableObject {
     }
 
     storage.setCurrentUserId(7700)
+      currentUserID = 7700
     loadLoginXawuxLAiwMUser()
   }
 
@@ -107,7 +114,8 @@ final class XawuxLAiwMUSerViewModel: ObservableObject {
       xawuxLAiwMFans: [],
       xawuxLAiwMBlacklist: [],
       xawuxLAiwMWalletBalance: 0,
-      xawuxLAiwMLikeWorks: [],
+      xawuxLAiwMLikeVideos: [],
+      xawuxLAiwMLikePosts: [],
       xawuxLAiwMIsDeleted: false
     )
 
@@ -150,19 +158,37 @@ final class XawuxLAiwMUSerViewModel: ObservableObject {
     loadLoginXawuxLAiwMUser()
   }
 
-  // 切换是否喜欢作品
-  func toggleWorkIsLiked(workId: Int) {
+  // 切换是否喜欢视频作品
+  func toggleVideoIsLiked(_ videoId: Int) {
     storage.updateUser(uid: currentUser!.xawuxLAiwMUserId) { user in
       var newUser: XawuxLAiwMUSer = user
-      if newUser.xawuxLAiwMLikeWorks.contains(workId) {
-        newUser.xawuxLAiwMLikeWorks.removeAll { $0 == workId }
+      if newUser.xawuxLAiwMLikeVideos.contains(videoId) {
+        newUser.xawuxLAiwMLikeVideos.removeAll { $0 == videoId }
+          storage.decreaseLikeCount(workId: videoId)
       } else {
-        newUser.xawuxLAiwMLikeWorks.append(workId)
+        newUser.xawuxLAiwMLikeVideos.append(videoId)
+          storage.increaseLikeCount(workId: videoId)
       }
       return newUser
     }
     loadLoginXawuxLAiwMUser()
   }
+    
+    // 切换是否喜欢图片作品
+    func toggleCosPostsIsLiked(_ postID: Int) {
+      storage.updateUser(uid: currentUser!.xawuxLAiwMUserId) { user in
+        var newUser: XawuxLAiwMUSer = user
+        if newUser.xawuxLAiwMLikePosts.contains(postID) {
+          newUser.xawuxLAiwMLikePosts.removeAll { $0 == postID }
+            storage.decreaseCosplayPostLikeCount(postId: postID)
+        } else {
+          newUser.xawuxLAiwMLikePosts.append(postID)
+            storage.increaseCosplayPostLikeCount(postId: postID)
+        }
+        return newUser
+      }
+      loadLoginXawuxLAiwMUser()
+    }
 
   // 切换关注状态
   func toggleXawuxLAiwMUserIsFollowed(followUserId: Int) {

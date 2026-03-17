@@ -7,12 +7,14 @@ struct ManuwqoAiComment: Codable, Identifiable, Equatable {
   var manuwqoAiCommentWorkId: Int
   var manuwqoAiCommentUserId: Int
   var manuwqoAiCommentText: String
+    var manuwqoAiCommentIsVideo: Bool
   var manuwqoAiDate: Date
 
   enum CodingKeys: String, CodingKey {
     case manuwqoAiCommentWorkId
     case manuwqoAiCommentUserId
     case manuwqoAiCommentText
+      case manuwqoAiCommentIsVideo
     case manuwqoAiDate
   }
 }
@@ -20,20 +22,60 @@ struct ManuwqoAiComment: Codable, Identifiable, Equatable {
 @MainActor
 final class ManuwqoAiCommentsViewModel: ObservableObject {
 
-  @Published var workCommentsNotBlock: [ManuwqoAiComment] = []
+  @Published var videoCommentsNotBlock: [ManuwqoAiComment] = []
+    @Published var cosPostCommentsNotBlock: [ManuwqoAiComment] = []
 
   private let storage = XigoAuwStorageManager.shared
 
-  func getManuwqoAiCommentsNotBlockByWorkId(workId: Int) {
+  func getVideoManuwqoAiCommentsNotBlockByWorkId(workId: Int) {
     let allComments: [ManuwqoAiComment] = storage.getComments(for: workId)
     guard let loginUserInfo = storage.getUserById(userId: storage.getCurrentUserId())
     else {
       return
     }
-    workCommentsNotBlock = allComments.filter {
+      videoCommentsNotBlock = allComments.filter {
       !loginUserInfo.xawuxLAiwMBlacklist.contains($0.manuwqoAiCommentUserId)
+          && $0.manuwqoAiCommentIsVideo
     }
   }
+    
+    func getCosPostManuwqoAiCommentsNotBlockByWorkId(workId: Int) {
+      let allComments: [ManuwqoAiComment] = storage.getComments(for: workId)
+      guard let loginUserInfo = storage.getUserById(userId: storage.getCurrentUserId())
+      else {
+        return
+      }
+        videoCommentsNotBlock = allComments.filter {
+        !loginUserInfo.xawuxLAiwMBlacklist.contains($0.manuwqoAiCommentUserId)
+            && !$0.manuwqoAiCommentIsVideo
+      }
+    }
+    
+    func getVideoManuwqoAiCommentsNotBlockCountByWorkId(workId: Int) -> Int {
+      let allComments: [ManuwqoAiComment] = storage.getComments(for: workId)
+      guard let loginUserInfo = storage.getUserById(userId: storage.getCurrentUserId())
+      else {
+        return 0
+      }
+      let workManuwqoAiCommentsNotBlock = allComments.filter {
+        !loginUserInfo.xawuxLAiwMBlacklist.contains($0.manuwqoAiCommentUserId)
+          && $0.manuwqoAiCommentIsVideo
+      }
+        return workManuwqoAiCommentsNotBlock.count
+    }
+    
+    func getCosPostManuwqoAiCommentsNotBlockCountByWorkId(workId: Int) -> Int {
+      let allComments: [ManuwqoAiComment] = storage.getComments(for: workId)
+      guard let loginUserInfo = storage.getUserById(userId: storage.getCurrentUserId())
+      else {
+        return 0
+      }
+      let workManuwqoAiCommentsNotBlock = allComments.filter {
+        !loginUserInfo.xawuxLAiwMBlacklist.contains($0.manuwqoAiCommentUserId)
+          && !$0.manuwqoAiCommentIsVideo
+      }
+        return workManuwqoAiCommentsNotBlock.count
+    }
 
   func getManuwqoAiCommetUserInfo(userId: Int) -> XawuxLAiwMUSer? {
     return storage.getUserById(userId: userId)

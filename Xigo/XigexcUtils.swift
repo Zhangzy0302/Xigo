@@ -48,8 +48,8 @@ enum XigexcTheme {
         }
 }
 
-enum LocalImageManager {
-  static func saveImage(_ image: UIImage) -> String? {
+enum XigoLocalImageManager {
+  static func saveXigoImage(_ image: UIImage) -> String? {
     let fileName = UUID().uuidString + ".jpg"
     let data = image.jpegData(compressionQuality: 0.9)
 
@@ -91,4 +91,45 @@ struct XigOUWnalAHlkskDialog<Dialog: View>: View {
         
         
     }
+}
+
+struct XigexNoawEmptyData: View {
+    let xigoexTopPadding: CGFloat?
+    
+    init(xigoexTopPadding: CGFloat = 10) {
+        self.xigoexTopPadding = xigoexTopPadding
+    }
+    var body: some View {
+        HStack{
+            Spacer()
+            Image("eiuaklaj_empty")
+                .resizable()
+                .frame(width: 154, height: 190)
+            Spacer()
+        }.padding()
+            .padding(.top, xigoexTopPadding)
+    }
+}
+
+func delay(_ seconds: Double) async {
+  try? await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
+}
+
+// 桥接 UIKit 恢复手势
+struct EnableSwipeBack: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        let controller = UIViewController()
+        
+        DispatchQueue.main.async {
+            if let nav = controller.navigationController {
+                nav.interactivePopGestureRecognizer?.isEnabled = true
+                nav.interactivePopGestureRecognizer?.delegate = nil
+            }
+        }
+        
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }

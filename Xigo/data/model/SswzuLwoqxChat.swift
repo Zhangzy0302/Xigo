@@ -103,6 +103,8 @@ final class SswzuLwoqxChatViewModel: ObservableObject {
         newRoom.sswzuLwoqxLastSendMsg = sendMsg.sswzuLwoqxTextMsg
       } else if !sendMsg.sswzuLwoqxAudioMsg.isEmpty {
         newRoom.sswzuLwoqxLastSendMsg = "[audio]"
+      } else if !sendMsg.sswzuLwoqxImageMsg.isEmpty {
+          newRoom.sswzuLwoqxLastSendMsg = "[picture]"
       }
       newRoom.sswzuLwoqxLastSendTime = Date()
       return newRoom
@@ -123,4 +125,25 @@ final class SswzuLwoqxChatViewModel: ObservableObject {
     }
     return storage.createChatRoom(chatUsersId: [loginUserId, chatUserId])
   }
+    
+    /// 将所有未删除且包含自己 ID 的聊天室标记为已删除
+    func markAllMyChatRoomsAsDeleted() {
+        let myUserId = storage.getCurrentUserId()
+        
+        // 遍历所有聊天室
+        let allRooms = storage.getChatRooms()
+        for room in allRooms {
+            // 条件：未删除 + 包含自己
+            if !room.sswzuLwoqxIsDeleted && room.sswzuLwoqxChatUsers.contains(myUserId) {
+                storage.updateChatRoom(roomId: room.sswzuLwoqxRoomId) { oldRoom in
+                    var updatedRoom = oldRoom
+                    updatedRoom.sswzuLwoqxIsDeleted = true
+                    return updatedRoom
+                }
+            }
+        }
+        
+        // 更新本地 ViewModel
+        getMySswzuLwoqxChatRoomsNotBlock()
+    }
 }

@@ -15,7 +15,7 @@ final class XigoAuwStorageManager {
     static let manuwqoAiComments: String = "manuwqoAiComments"
     static let sswzuLwoqxChatRooms: String = "sswzuLwoqxChatRooms"
     static let sswzuLwoqxMessages: String = "sswzuLwoqxMessages"
-    static let violinRecord: String = "violinRecord"
+    static let cosplayPosts: String = "cosplayPosts"
     static let xigoAuwCurrentUserId: String = "xigoAuwCurrentUserId"
   }
 }
@@ -28,7 +28,7 @@ extension XigoAuwStorageManager {
     initializeCommentsIfNeeded()
     initializeChatRoomsIfNeeded()
     initializeMessagesIfNeeded()
-    initializeViolinRecordIfNeeded()
+    initializeCosplayPostsIfNeeded()
   }
 
 }
@@ -47,11 +47,12 @@ extension XigoAuwStorageManager {
         xawuxLAiwMUserName: "elihu rayo",
         xawuxLAiwMAvatar:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/lkwijaxiw_0.png",
-        xawuxLAiwMFollowing: [1],
-        xawuxLAiwMFans: [],
+        xawuxLAiwMFollowing: [1, 2],
+        xawuxLAiwMFans: [4, 5],
         xawuxLAiwMBlacklist: [],
-        xawuxLAiwMWalletBalance: 1000,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMWalletBalance: 0,
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
       XawuxLAiwMUSer(
@@ -65,7 +66,8 @@ extension XigoAuwStorageManager {
         xawuxLAiwMFans: [0],
         xawuxLAiwMBlacklist: [],
         xawuxLAiwMWalletBalance: 0,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
       XawuxLAiwMUSer(
@@ -79,7 +81,8 @@ extension XigoAuwStorageManager {
         xawuxLAiwMFans: [0],
         xawuxLAiwMBlacklist: [],
         xawuxLAiwMWalletBalance: 0,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
       XawuxLAiwMUSer(
@@ -90,10 +93,11 @@ extension XigoAuwStorageManager {
         xawuxLAiwMAvatar:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/lkwijaxiw_3.png",
         xawuxLAiwMFollowing: [],
-        xawuxLAiwMFans: [0],
+        xawuxLAiwMFans: [],
         xawuxLAiwMBlacklist: [],
         xawuxLAiwMWalletBalance: 0,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
       XawuxLAiwMUSer(
@@ -103,44 +107,47 @@ extension XigoAuwStorageManager {
         xawuxLAiwMUserName: "keithik2",
         xawuxLAiwMAvatar:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/lkwijaxiw_4.png",
-        xawuxLAiwMFollowing: [],
-        xawuxLAiwMFans: [0],
+        xawuxLAiwMFollowing: [0],
+        xawuxLAiwMFans: [],
         xawuxLAiwMBlacklist: [],
         xawuxLAiwMWalletBalance: 0,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
       XawuxLAiwMUSer(
         xawuxLAiwMUserId: 5,
-        xawuxLAiwMEmail: "Raja1ja@gmail.com",
-        xawuxLAiwMPassword: "2832005",
-        xawuxLAiwMUserName: "Raja",
+        xawuxLAiwMEmail: "RaElodie@gmail.com",
+        xawuxLAiwMPassword: "21wda2asdasd",
+        xawuxLAiwMUserName: "Elodie",
         xawuxLAiwMAvatar:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/lkwijaxiw_5.png",
-        xawuxLAiwMFollowing: [],
-        xawuxLAiwMFans: [0],
+        xawuxLAiwMFollowing: [0],
+        xawuxLAiwMFans: [],
         xawuxLAiwMBlacklist: [],
         xawuxLAiwMWalletBalance: 0,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
       XawuxLAiwMUSer(
         xawuxLAiwMUserId: 6,
         xawuxLAiwMEmail: "Raja1ja@gmail.com",
-        xawuxLAiwMPassword: "2832005",
-        xawuxLAiwMUserName: "Raja",
+        xawuxLAiwMPassword: "2821sdda2005",
+        xawuxLAiwMUserName: "Liquor",
         xawuxLAiwMAvatar:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/lkwijaxiw_6.png",
         xawuxLAiwMFollowing: [],
-        xawuxLAiwMFans: [0],
+        xawuxLAiwMFans: [],
         xawuxLAiwMBlacklist: [],
         xawuxLAiwMWalletBalance: 0,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
       XawuxLAiwMUSer(
         xawuxLAiwMUserId: 7,
-        xawuxLAiwMEmail: "Raja1ja@gmail.com",
+        xawuxLAiwMEmail: "cewjaljxw@gmail.com",
         xawuxLAiwMPassword: "2832005",
         xawuxLAiwMUserName: "Raja",
         xawuxLAiwMAvatar:
@@ -149,20 +156,22 @@ extension XigoAuwStorageManager {
         xawuxLAiwMFans: [0],
         xawuxLAiwMBlacklist: [],
         xawuxLAiwMWalletBalance: 0,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
       XawuxLAiwMUSer(
         xawuxLAiwMUserId: 8,
         xawuxLAiwMEmail: "",
         xawuxLAiwMPassword: "",
-        xawuxLAiwMUserName: "Visitor_40024",
-        xawuxLAiwMAvatar: "cponlzna_default_avatar",
+        xawuxLAiwMUserName: "Visitor_50024",
+        xawuxLAiwMAvatar: "cukan_default",
         xawuxLAiwMFollowing: [],
         xawuxLAiwMFans: [],
         xawuxLAiwMBlacklist: [],
         xawuxLAiwMWalletBalance: 0,
-        xawuxLAiwMLikeWorks: [],
+        xawuxLAiwMLikeVideos: [],
+        xawuxLAiwMLikePosts: [],
         xawuxLAiwMIsDeleted: false
       ),
     ]
@@ -222,7 +231,7 @@ extension XigoAuwStorageManager {
       ErwyAuwVideo(
         erwyAuwWorkId: 0,
         erwyAuwCreatorId: 0,
-        erwyAuwTextContent: "Playing the violin in this setting has a unique charm.",
+        erwyAuwTextContent: "Playing the cosplay in this setting has a unique charm.",
         erwyAuwVideoUrl:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/bdfkuyAwlx_0.mp4",
         erwyAuwVideoCover:
@@ -234,7 +243,7 @@ extension XigoAuwStorageManager {
         erwyAuwWorkId: 1,
         erwyAuwCreatorId: 1,
         erwyAuwTextContent:
-          "Playing the violin on the vast snowy ground gives the music a sense of emptiness.",
+          "Playing the cosplay on the vast snowy ground gives the music a sense of emptiness.",
         erwyAuwVideoUrl:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/bdfkuyAwlx_1.mp4",
         erwyAuwVideoCover:
@@ -246,7 +255,7 @@ extension XigoAuwStorageManager {
         erwyAuwWorkId: 2,
         erwyAuwCreatorId: 2,
         erwyAuwTextContent:
-          "Using the sound of the violin to communicate with the world, each note is a gentle expression.",
+          "Using the sound of the cosplay to communicate with the world, each note is a gentle expression.",
         erwyAuwVideoUrl:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/bdfkuyAwlx_2.mp4",
         erwyAuwVideoCover:
@@ -268,7 +277,7 @@ extension XigoAuwStorageManager {
       ErwyAuwVideo(
         erwyAuwWorkId: 4,
         erwyAuwCreatorId: 4,
-        erwyAuwTextContent: "Practice the violin seriously and live seriously.",
+        erwyAuwTextContent: "Practice the cosplay seriously and live seriously.",
         erwyAuwVideoUrl:
           "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/bdfkuyAwlx_4.mp4",
         erwyAuwVideoCover:
@@ -327,6 +336,38 @@ extension XigoAuwStorageManager {
 
     erwyAuwWorks[index] = work
   }
+    
+    // like + 1
+    func increaseLikeCount(workId: Int) {
+        var erwyAuwWorks = getWorks()
+        
+        guard let index = erwyAuwWorks.firstIndex(where: {
+            $0.erwyAuwWorkId == workId
+        }) else {
+            return
+        }
+        
+        erwyAuwWorks[index].erwyAuwLikeCount += 1
+        
+        save(erwyAuwWorks, forKey: Keys.erwyAuwWorks)
+    }
+    
+    // like - 1
+    func decreaseLikeCount(workId: Int) {
+        var erwyAuwWorks = getWorks()
+        
+        guard let index = erwyAuwWorks.firstIndex(where: {
+            $0.erwyAuwWorkId == workId
+        }) else {
+            return
+        }
+        
+        if erwyAuwWorks[index].erwyAuwLikeCount > 0 {
+            erwyAuwWorks[index].erwyAuwLikeCount -= 1
+        }
+        
+        save(erwyAuwWorks, forKey: Keys.erwyAuwWorks)
+    }
 
   // 软删除
   func deleteWork(_ work: ErwyAuwVideo) {
@@ -438,53 +479,111 @@ extension XigoAuwStorageManager {
   }
 }
 
-// moive
+
 extension XigoAuwStorageManager {
-  private func initializeViolinRecordIfNeeded() {
-    guard storage.data(forKey: Keys.violinRecord) == nil else { return }
-    let jflawhPracRecord: [JflawhPracRecord] = [
-      JflawhPracRecord(
-        jflawhPracRecordUserId: 0,
-        jflawhPracRecordImage:
-          "http://huanniuchat.oss-accelerate.aliyuncs.com/XigoAuw2026/wiancz_practice.jpg",
-        jflawhPracRecordText:
-          "Good concentration, core tasks fully practiced with obvious improvement; slight instability in bow tip/root bowing, stiff finger shifting in high positions, rigid dotted rhythm handling",
-        jflawhPracRecordStatus: 3,
-        jflawhPracRecordPracticeDuration: "1h 30min",
-        jflawhPracRecordDate: Date(timeIntervalSince1970: 1_706_418_600)
+  private func initializeCosplayPostsIfNeeded() {
+    guard storage.data(forKey: Keys.cosplayPosts) == nil else { return }
+    let wUiqbahCosPosts: [WUiqbahCosPosts] = [
+      WUiqbahCosPosts(
+        wUiqbahCosPostsId: 0,
+        wUiqbahCosPostsUserId: 5,
+        wUiqbahCosPostsImageList:
+          ["http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/i4wkjcnw_0.png",
+          "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/i4wkjcnw_1.png"],
+        wUiqbahCosPostsText:
+          "task",
+        wUiqbahCosPostsDate: Date(timeIntervalSince1970: 1_706_418_600),
+        wUiqbahCosPostsLikesCount: 461,
+        wUiqbahCosPostsIsDeleted: false
+      ),
+      WUiqbahCosPosts(
+        wUiqbahCosPostsId: 1,
+        wUiqbahCosPostsUserId: 6,
+        wUiqbahCosPostsImageList:
+          ["http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/i4wkjcnw_2.png",
+          "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/i4wkjcnw_3.png"],
+        wUiqbahCosPostsText:
+          "Joined the Sith after being threatened by Djaron",
+        wUiqbahCosPostsDate: Date(timeIntervalSince1970: 1_706_418_600),
+        wUiqbahCosPostsLikesCount: 723,
+        wUiqbahCosPostsIsDeleted: false
+      ),
+      WUiqbahCosPosts(
+        wUiqbahCosPostsId: 2,
+        wUiqbahCosPostsUserId: 7,
+        wUiqbahCosPostsImageList:
+          ["http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/i4wkjcnw_4.png",
+          "http://huanniuchat.oss-accelerate.aliyuncs.com/Xigo2026/i4wkjcnw_5.png"],
+        wUiqbahCosPostsText:
+          "What should I say when I see Barbie?",
+        wUiqbahCosPostsDate: Date(timeIntervalSince1970: 1_706_418_600),
+        wUiqbahCosPostsLikesCount: 235,
+        wUiqbahCosPostsIsDeleted: false
       )
     ]
-    save(jflawhPracRecord, forKey: Keys.violinRecord)
+    save(wUiqbahCosPosts, forKey: Keys.cosplayPosts)
   }
 
-  func getViolinRecord() -> [JflawhPracRecord] {
-    load([JflawhPracRecord].self, forKey: Keys.violinRecord, default: [])
+  func getCosplayPosts() -> [WUiqbahCosPosts] {
+    load([WUiqbahCosPosts].self, forKey: Keys.cosplayPosts, default: [])
   }
 
-  func addViolinRecord(_ history: JflawhPracRecord) {
-    var histories = load([JflawhPracRecord].self, forKey: Keys.violinRecord, default: [])
+  func addCosplayPosts(_ history: WUiqbahCosPosts) {
+    var histories = load([WUiqbahCosPosts].self, forKey: Keys.cosplayPosts, default: [])
     histories.append(history)
-    save(histories, forKey: Keys.violinRecord)
+    save(histories, forKey: Keys.cosplayPosts)
   }
-
-  func deleteViolinRecord(_ workId: UUID) {
-    var histories: [JflawhPracRecord] = load(
-      [JflawhPracRecord].self, forKey: Keys.violinRecord, default: [])
-    histories.removeAll {
-      $0.id == workId
+    
+    // like + 1
+    func increaseCosplayPostLikeCount(postId: Int) {
+        var posts = getCosplayPosts()
+        
+        guard let index = posts.firstIndex(where: {
+            $0.wUiqbahCosPostsId == postId
+        }) else {
+            return
+        }
+        
+        posts[index].wUiqbahCosPostsLikesCount += 1
+        
+        save(posts, forKey: Keys.cosplayPosts)
     }
-    save(histories, forKey: Keys.violinRecord)
-  }
+    
+    // like - 1
+    func decreaseCosplayPostLikeCount(postId: Int) {
+        var posts = getCosplayPosts()
+        
+        guard let index = posts.firstIndex(where: {
+            $0.wUiqbahCosPostsId == postId
+        }) else {
+            return
+        }
+        
+        if posts[index].wUiqbahCosPostsLikesCount > 0 {
+            posts[index].wUiqbahCosPostsLikesCount -= 1
+        }
+        
+        save(posts, forKey: Keys.cosplayPosts)
+    }
 
   // 根据用户Id删除所有
-  func deleteViolinRecordByUserId(_ userId: Int) {
-    var histories: [JflawhPracRecord] = load(
-      [JflawhPracRecord].self, forKey: Keys.violinRecord, default: [])
-    histories.removeAll {
-      $0.jflawhPracRecordUserId == userId
+    func deleteCosplayPostsByUserId(_ userId: Int) {
+        let histories: [WUiqbahCosPosts] = load(
+            [WUiqbahCosPosts].self,
+            forKey: Keys.cosplayPosts,
+            default: []
+        )
+        
+        let updated = histories.map { post in
+            var post = post
+            if post.wUiqbahCosPostsUserId == userId {
+                post.wUiqbahCosPostsIsDeleted = true
+            }
+            return post
+        }
+        
+        save(updated, forKey: Keys.cosplayPosts)
     }
-    save(histories, forKey: Keys.violinRecord)
-  }
 }
 
 //底层通用存取（核心）
