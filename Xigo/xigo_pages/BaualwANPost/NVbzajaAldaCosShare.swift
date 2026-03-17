@@ -93,7 +93,7 @@ struct NVbzajaAldaCosShare: View {
                 
             }.frame(maxHeight: .infinity)
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onAppear{
                 nvbzajaPostVM.getAllNotBlockwUiqbahCosPosts()
             }

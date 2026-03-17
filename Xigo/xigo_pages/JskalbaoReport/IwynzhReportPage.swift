@@ -97,7 +97,7 @@ struct IwynzhReportPage: View {
                     }
             }
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onTapGesture {
                 iwyaIsFocus = false
             }

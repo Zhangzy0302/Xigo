@@ -41,7 +41,7 @@ struct NCbzSalDeleteAccont: View {
                                     let ncvSaiwUserID = ncvhahUserVM.currentUserID
                                     Task{
                                         DwhaiXeuHUD.showLoading(showBackground: true)
-                                        await delay(2)
+                                        await xiwandelay(2)
                                         DwhaiXeuHUD.hideLoading()
                                         ncauzPostVM.softDeletePostsByUserId(ncvSaiwUserID)
                                         ncajaxmVIdeoVM.deleteMyErwyAuwWorks()

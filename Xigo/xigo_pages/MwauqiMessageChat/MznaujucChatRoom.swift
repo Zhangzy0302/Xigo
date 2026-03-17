@@ -132,7 +132,7 @@ struct MznaujucChatRoom: View {
         }.onTapGesture {
             mzmakjIsFocus = false
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onAppear{
                 maznuaChatVM.getSswzuLwoqxMessageListByChatId(chatRoomId: mznaujucRoomId)
             }

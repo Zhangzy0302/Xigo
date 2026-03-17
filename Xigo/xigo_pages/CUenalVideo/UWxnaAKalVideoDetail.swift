@@ -62,7 +62,7 @@ struct UWxnaAKalVideoDetail: View {
         }.overlay{
             HGhauwComment(hghaIsShowCOmment: $uwnaxIsShowCOOcmet, hghuawVideoId: uwxnaAkVideoId, hghaugIsVideo: true)
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onAppear{
                 uwnaxVideoVM.getErwyAuwWorkDetailByWorkId(workId: uwxnaAkVideoId)
             }

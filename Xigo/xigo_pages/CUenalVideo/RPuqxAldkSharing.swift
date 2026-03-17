@@ -63,7 +63,7 @@ struct RPuqxAldkSharing: View {
                 
             }
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onAppear{
                 rPuaqunVideoVM.getAllNotBlockErwyAuwWorks()
             }

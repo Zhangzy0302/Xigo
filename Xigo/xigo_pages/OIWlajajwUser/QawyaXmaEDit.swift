@@ -109,7 +109,7 @@ struct QawyaXmaEDit: View {
             }
         }
         .navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onAppear{
                 if let qamdMine = qaawnzUserVm.currentUser {
                     qawyXmaUserAvatar = qamdMine.xawuxLAiwMAvatar

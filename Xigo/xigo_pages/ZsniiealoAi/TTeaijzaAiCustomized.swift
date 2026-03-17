@@ -171,7 +171,7 @@ struct TTeaijzaAiCustomized: View {
                 CienajHWhaNoMoney(cianIsShow: $ttauIsShowNoMOney)
             }.transition(.opacity)
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onTapGesture {
                 ttiwalOIsFocus_0 = false
                 ttiwalOIsFocus_1 = false

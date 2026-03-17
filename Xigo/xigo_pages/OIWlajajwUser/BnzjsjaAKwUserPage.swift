@@ -126,7 +126,7 @@ struct BnzjsjaAKwUserPage: View {
                 
             }
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onAppear{
                 bnzjiakaUserVM.getXawuxLAiwMUserInfoByUid(uid: bnzjiaAkwUserID)
             }

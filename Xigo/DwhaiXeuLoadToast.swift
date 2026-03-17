@@ -50,7 +50,7 @@ final class DwhaiXeuLoadingToast: ObservableObject {
     static let shared = DwhaiXeuLoadingToast()
 
     @Published var toast: DwhaiXeuToast?
-    @Published var isLoading: Bool = false
+    @Published var dwahuxnIsLoading: Bool = false
     @Published var showBackground: Bool = false // ✅ 是否显示黑色半透明背景
 
     private init() {}
@@ -71,11 +71,11 @@ final class DwhaiXeuLoadingToast: ObservableObject {
     /// 显示 loading，可选择是否显示遮罩
     func showLoading(showBackground: Bool = false) {
         self.showBackground = showBackground
-        isLoading = true
+        dwahuxnIsLoading = true
     }
 
     func hideLoading() {
-        isLoading = false
+        dwahuxnIsLoading = false
         showBackground = false
     }
 }
@@ -83,13 +83,13 @@ final class DwhaiXeuLoadingToast: ObservableObject {
 
 struct DwhaiXeuHUDView: View {
 
-  @ObservedObject private var hud = DwhaiXeuLoadingToast.shared
+  @ObservedObject private var shsrwiALjxal = DwhaiXeuLoadingToast.shared
 
   var body: some View {
     ZStack {
     // 🚫 Loading 时的点击拦截层
-          if hud.isLoading {
-              if hud.showBackground {
+          if shsrwiALjxal.dwahuxnIsLoading {
+              if shsrwiALjxal.showBackground {
                   Color.black
                       .opacity(0.4) // 默认半透明，可调
                       .ignoresSafeArea()
@@ -101,7 +101,7 @@ struct DwhaiXeuHUDView: View {
             
           }
       // Loading
-      if hud.isLoading {
+      if shsrwiALjxal.dwahuxnIsLoading {
         // 弹窗内容
         VStack(spacing: 22) {
           ProgressView()
@@ -122,15 +122,15 @@ struct DwhaiXeuHUDView: View {
       }
 
       // Toast
-      if let toast = hud.toast {
+      if let toast = shsrwiALjxal.toast {
         VStack {
           Spacer()
             VStack(spacing: 16) {
 
-            if let icon = toast.type.icon {
-              Image(systemName: icon)
+            if let dwahuxnIcon = toast.type.dwahuxnIcon {
+              Image(systemName: dwahuxnIcon)
                     .frame(width: 30)
-                    .foregroundColor(toast.type.backgroundColor)
+                    .foregroundColor(toast.type.dwahuxnColor)
             }
 
             Text(toast.text)
@@ -147,7 +147,7 @@ struct DwhaiXeuHUDView: View {
         }
       }
     }
-    .animation(.easeInOut, value: hud.isLoading)
+    .animation(.easeInOut, value: shsrwiALjxal.dwahuxnIsLoading)
   }
 }
 
@@ -156,7 +156,7 @@ enum DwhaiXeuToastType {
   case success
   case error
 
-  var backgroundColor: Color {
+  var dwahuxnColor: Color {
     switch self {
     case .normal:
       return .white
@@ -167,7 +167,7 @@ enum DwhaiXeuToastType {
     }
   }
 
-  var icon: String? {
+  var dwahuxnIcon: String? {
     switch self {
     case .success:
       return "checkmark.circle.fill"

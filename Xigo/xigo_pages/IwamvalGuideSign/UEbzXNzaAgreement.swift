@@ -29,6 +29,6 @@ struct UEbzXNzaAgreement: View {
                 AXaixlkalAJxlpWebView(urlString: urbzlxxnWebUrl)
             }
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
     }
 }

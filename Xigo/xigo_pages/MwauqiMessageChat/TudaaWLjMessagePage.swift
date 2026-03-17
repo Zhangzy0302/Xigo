@@ -33,7 +33,7 @@ struct TudaaWLjMessagePage: View {
                 
             }
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onAppear{
                 tudaawalChatVm.getMySswzuLwoqxChatRoomsNotBlock()
             }

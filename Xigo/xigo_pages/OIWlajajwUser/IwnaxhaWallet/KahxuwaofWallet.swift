@@ -102,6 +102,6 @@ struct KahxuwaofWallet: View {
                 }
             }
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
     }
 }

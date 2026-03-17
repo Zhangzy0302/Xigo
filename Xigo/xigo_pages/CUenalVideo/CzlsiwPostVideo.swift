@@ -105,7 +105,7 @@ struct CzlsiwPostVideo: View {
                             let newiawID = czlisiwVideoVM.addNewErwyAuwWork(textContent: cznajLsText, videoUrl: asuwaVideoPath, videoCover: asuwaVideoCover)
                             Task {
                                 DwhaiXeuHUD.showLoading()
-                                await delay(0.6)
+                                await xiwandelay(0.6)
                                 DwhaiXeuHUD.hideLoading()
                                 cznliswNAviMA.pop()
                                 cznliswNAviMA.push(.uWxnazaAkalVideoDetail(uWanaiVideoID: newiawID))
@@ -120,7 +120,7 @@ struct CzlsiwPostVideo: View {
                             Task {
                                 let newixnwPostID = czlisiwPostVM.addMyPosts(cznajLsText, imageList: axanaljmxImageList)
                                 DwhaiXeuHUD.showLoading()
-                                await delay(0.6)
+                                await xiwandelay(0.6)
                                 DwhaiXeuHUD.hideLoading()
                                 cznliswNAviMA.pop()
                                 cznliswNAviMA.push(.fhweyaOueCosDetail(fhwuPostId: newixnwPostID))
@@ -134,7 +134,7 @@ struct CzlsiwPostVideo: View {
             cznajIsFocus = false
         }
         .navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .ignoresSafeArea(.keyboard)
     }
     

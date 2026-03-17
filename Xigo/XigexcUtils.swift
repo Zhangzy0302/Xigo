@@ -50,20 +50,20 @@ enum XigexcTheme {
 
 enum XigoLocalImageManager {
   static func saveXigoImage(_ image: UIImage) -> String? {
-    let fileName = UUID().uuidString + ".jpg"
-    let data = image.jpegData(compressionQuality: 0.9)
+    let xigoFileName = UUID().uuidString + ".jpg"
+    let xigoData = image.jpegData(compressionQuality: 0.9)
 
-    guard let data else { return nil }
+    guard let xigoData else { return nil }
 
     let documentsURL = FileManager.default.urls(
       for: .documentDirectory,
       in: .userDomainMask
     ).first!
 
-    let fileURL = documentsURL.appendingPathComponent(fileName)
+    let fileURL = documentsURL.appendingPathComponent(xigoFileName)
 
     do {
-      try data.write(to: fileURL)
+      try xigoData.write(to: fileURL)
       return fileURL.path  // ✅ 返回 String，正好给 ieujanMyAvatar 用
     } catch {
       print("Save image error:", error)
@@ -111,12 +111,12 @@ struct XigexNoawEmptyData: View {
     }
 }
 
-func delay(_ seconds: Double) async {
+func xiwandelay(_ seconds: Double) async {
   try? await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
 }
 
 // 桥接 UIKit 恢复手势
-struct EnableSwipeBack: UIViewControllerRepresentable {
+struct XiwanEnableSwipeBack: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
         let controller = UIViewController()

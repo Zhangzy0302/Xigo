@@ -98,7 +98,7 @@ struct TrwyquGuidePage: View {
                         }
                         Task{@MainActor in
                             DwhaiXeuHUD.showLoading(showBackground: true)
-                            await delay(0.6)
+                            await xiwandelay(0.6)
                             DwhaiXeuHUD.hideLoading()
                             tywaizUserVM.visitorLoginXawuxLAiwM()
                         }

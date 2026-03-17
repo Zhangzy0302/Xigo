@@ -26,7 +26,7 @@ struct OeuqnAhldSetting: View {
             }
             
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .overlay{
             XigOUWnalAHlkskDialog(
                 xigousIsShow: $oezShowDelete

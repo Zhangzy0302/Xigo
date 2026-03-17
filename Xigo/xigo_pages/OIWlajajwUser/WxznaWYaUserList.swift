@@ -101,7 +101,7 @@ struct WxznaWYaUserList: View {
             }
             
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .onAppear{
                 wuaUSerVm.loadLoginXawuxLAiwMUser()
             }

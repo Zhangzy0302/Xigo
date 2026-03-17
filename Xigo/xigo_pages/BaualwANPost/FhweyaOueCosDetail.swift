@@ -61,7 +61,7 @@ struct FhweyaOueCosDetail: View {
         }.onTapGesture {
             wainFocus = false
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
     }
     
     

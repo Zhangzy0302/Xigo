@@ -34,7 +34,7 @@ struct WeytqxzSignPage: View {
             if let weyaijalMatch = oeaozm.loginByEmailAndPasswordXawuxLAiwM(email: weytaqxEmail, password: weytaqxPassword) {
                 Task {@MainActor in
                     DwhaiXeuHUD.showLoading(showBackground: true)
-                    await delay(0.9)
+                    await xiwandelay(0.9)
                     DwhaiXeuHUD.hideLoading()
                     weyqoiaNaviManer.popToRoot()
                 }
@@ -45,7 +45,7 @@ struct WeytqxzSignPage: View {
         case .xmailaSignUp:
             if let resutl = oeaozm.registerXawuxLAiwM(email: weytaqxEmail, password: weytaqxPassword) {
                 DwhaiXeuHUD.showLoading(showBackground: true)
-                await delay(0.9)
+                await xiwandelay(0.9)
                 DwhaiXeuHUD.hideLoading()
                 weyqoiaNaviManer.popToRoot()
             }else{
@@ -153,7 +153,7 @@ struct WeytqxzSignPage: View {
             weytaqxIsFocus_1 = false
             weytaqxIsFocus_2 = false
         }.navigationBarHidden(true)
-            .background(EnableSwipeBack())
+            .background(XiwanEnableSwipeBack())
             .animation(.easeIn(duration: 0.4), value: weyauSignType)
             .onAppear{
                 weyauSignType = weyaiaIsSignUp ? .xmailaSignUp : .lxaiwaLogin

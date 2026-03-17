@@ -14,14 +14,9 @@ struct RYEyxnaWAIResult: View {
     
     @EnvironmentObject var ryeAisjNavi: UxzuaNaaviManer
     
-    // 模拟延迟函数 (如果项目中已有可删除)
-    func delay(_ seconds: Int) async {
-        try? await Task.sleep(nanoseconds: UInt64(seconds) * 1_000_000_000)
-    }
-    
     // 纯数据获取函数：只负责返回字符串，不操作 UI 状态
     func fetchResultData() async -> String {
-        await delay(3) // 模拟网络请求时间
+        await xiwandelay(3) // 模拟网络请求时间
         
         // 模拟数据查找逻辑 (请确保 ryecanAiResult 在此作用域可见)
         // 假设 ryecanAiResult 是一个全局数组或单例
@@ -150,7 +145,7 @@ struct RYEyxnaWAIResult: View {
             .padding(.top, 10)
         }
         .navigationBarHidden(true)
-        .background(EnableSwipeBack())
+        .background(XiwanEnableSwipeBack())
         .task {
             // 视图出现时自动触发数据加载
             if aiwnxIsLoading {
