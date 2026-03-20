@@ -137,7 +137,7 @@ platform :ios do
     update_code_signing_settings(
       path: "Xigo.xcodeproj",
       use_automatic_signing: false,
-      team_id: "6DUGLVGD5U",
+      team_id: "QDR9PNPS62",
       targets: ["Xigo"],
       code_sign_identity: "Apple Distribution",
       profile_name: "match AppStore com.euaqwxuajxigo.Xigo",
