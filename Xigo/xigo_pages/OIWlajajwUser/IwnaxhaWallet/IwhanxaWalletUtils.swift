@@ -55,14 +55,24 @@ class IwhanxaIAPManager: NSObject, ObservableObject {
     deinit {
         SKPaymentQueue.default().remove(self)
     }
+    
+    private var iwhanxaRetryCount = 0
+    private let iwhanxaMaxRetryCount = 10
+    private var iwhanxaIsRequesting = false
 
     // MARK: - 拉取商品
     func psieAJxaloietchProducts() {
-
+        
+        // 防止重复请求
+        guard !iwhanxaIsRequesting else { return }
+        
+        // 已有数据就不再请求
         guard xcmnueProducnsts.isEmpty else { return }
-
+        
+        iwhanxaIsRequesting = true
+        
         let ids = Set(alkwjAJeiwnbgProducts.map { $0.tierjAHncalKeyId })
-
+        
         request = SKProductsRequest(productIdentifiers: ids)
         request?.delegate = self
         request?.start()
@@ -98,13 +108,45 @@ extension IwhanxaIAPManager: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
 
         DispatchQueue.main.async {
+            self.iwhanxaIsRequesting = false
+            self.iwhanxaRetryCount = 0   // ✅ 成功后清零
+            
             self.xcmnueProducnsts = response.products
-            print("Loaded xcmnueProducnsts:", response.products.map { $0.productIdentifier })
+            
+            print("Loaded:", response.products.map { $0.productIdentifier })
+            
+            // ⚠️ 如果一个都没拿到，也可以认为失败
+            if response.products.isEmpty {
+                self.iwhanxaRetryFetch()
+            }
         }
     }
 
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        DwhaiXeuHUD.toast(.error("Load xcmnueProducnsts failed: \(error.localizedDescription)"))
+        
+        DispatchQueue.main.async {
+            self.iwhanxaIsRequesting = false
+            
+            print("Load failed:", error.localizedDescription)
+            
+            self.iwhanxaRetryFetch()
+        }
+    }
+    
+    private func iwhanxaRetryFetch() {
+        
+        guard iwhanxaRetryCount < iwhanxaMaxRetryCount else {
+            DwhaiXeuHUD.toast(.error("Load products failed"))
+            return
+        }
+        
+        iwhanxaRetryCount += 1
+        
+        let delay = pow(2.0, Double(iwhanxaRetryCount)) // 指数退避（2,4,8秒）
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.psieAJxaloietchProducts()
+        }
     }
 }
 
