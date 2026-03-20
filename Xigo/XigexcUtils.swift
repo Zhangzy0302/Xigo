@@ -122,9 +122,9 @@ struct XiwanEnableSwipeBack: UIViewControllerRepresentable {
         let controller = UIViewController()
         
         DispatchQueue.main.async {
-            if let nav = controller.navigationController {
-                nav.interactivePopGestureRecognizer?.isEnabled = true
-                nav.interactivePopGestureRecognizer?.delegate = nil
+            if let xiwLAKwjlxja = controller.navigationController {
+                xiwLAKwjlxja.interactivePopGestureRecognizer?.isEnabled = true
+                xiwLAKwjlxja.interactivePopGestureRecognizer?.delegate = nil
             }
         }
         
