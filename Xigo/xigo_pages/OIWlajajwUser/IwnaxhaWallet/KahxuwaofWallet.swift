@@ -79,7 +79,7 @@ struct KahxuwaofWallet: View {
                                                 .padding(.leading, 15)
                                         }
                                 }.onTapGesture {
-                                    kahsuWalletIpa.bneualIWlaRecharge(prod) {result in
+                                    kahsuWalletIpa.bneualIWlaRecharge(prod.tierjAHncalKeyId) {result in
                                         switch result {
                                         case .success(let diamond):
                                             kahsuUserVM.increaseUserDiamond(diamond: diamond)

@@ -1,6 +1,7 @@
 
 import StoreKit
 import SwiftUI
+import FBSDKCoreKit
 
 struct IwhanxaProduct {
   let tierjAHncalKeyId: String
@@ -8,27 +9,50 @@ struct IwhanxaProduct {
   let tierjAHncalPrice: Double
 }
 
+//let alkwjAJeiwnbgProducts: [IwhanxaProduct] = [
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "sttcjbtjtyhgqlau", tierjAHncalGetDiamond: 400, tierjAHncalPrice: 0.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "yjwgrtqvosbexcgo", tierjAHncalGetDiamond: 800, tierjAHncalPrice: 1.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "jlwmzqopvtnxarce", tierjAHncalGetDiamond: 1290, tierjAHncalPrice: 2.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "vsfzvdivciywjbvt", tierjAHncalGetDiamond: 2450, tierjAHncalPrice: 4.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "xkavmtrqplbnozye", tierjAHncalGetDiamond: 3950, tierjAHncalPrice: 7.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "mggoijtnjnwkniyq", tierjAHncalGetDiamond: 5150, tierjAHncalPrice: 9.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "dusqwrxkzjphlvae", tierjAHncalGetDiamond: 7400, tierjAHncalPrice: 14.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "dgbfuzfjjumhphwj", tierjAHncalGetDiamond: 10800, tierjAHncalPrice: 19.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "jjpynvzheswgatyq", tierjAHncalGetDiamond: 29400, tierjAHncalPrice: 49.99),
+//  IwhanxaProduct(
+//    tierjAHncalKeyId: "wkeiyyvplztyvhhk", tierjAHncalGetDiamond: 63700, tierjAHncalPrice: 99.99)
+//]
+
 let alkwjAJeiwnbgProducts: [IwhanxaProduct] = [
   IwhanxaProduct(
-    tierjAHncalKeyId: "sttcjbtjtyhgqlau", tierjAHncalGetDiamond: 400, tierjAHncalPrice: 0.99),
+    tierjAHncalKeyId: "lvbsvhxcgcrvesor", tierjAHncalGetDiamond: 400, tierjAHncalPrice: 0.99),
   IwhanxaProduct(
     tierjAHncalKeyId: "yjwgrtqvosbexcgo", tierjAHncalGetDiamond: 800, tierjAHncalPrice: 1.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "jlwmzqopvtnxarce", tierjAHncalGetDiamond: 1290, tierjAHncalPrice: 2.99),
+    tierjAHncalKeyId: "dxismgcwewhrtezo", tierjAHncalGetDiamond: 1290, tierjAHncalPrice: 2.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "vsfzvdivciywjbvt", tierjAHncalGetDiamond: 2450, tierjAHncalPrice: 4.99),
+    tierjAHncalKeyId: "khtxlcejaxmqcsra", tierjAHncalGetDiamond: 2450, tierjAHncalPrice: 4.99),
   IwhanxaProduct(
     tierjAHncalKeyId: "xkavmtrqplbnozye", tierjAHncalGetDiamond: 3950, tierjAHncalPrice: 7.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "mggoijtnjnwkniyq", tierjAHncalGetDiamond: 5150, tierjAHncalPrice: 9.99),
+    tierjAHncalKeyId: "yadwwvxspgxwlndb", tierjAHncalGetDiamond: 5150, tierjAHncalPrice: 9.99),
   IwhanxaProduct(
     tierjAHncalKeyId: "dusqwrxkzjphlvae", tierjAHncalGetDiamond: 7400, tierjAHncalPrice: 14.99),
   IwhanxaProduct(
     tierjAHncalKeyId: "dgbfuzfjjumhphwj", tierjAHncalGetDiamond: 10800, tierjAHncalPrice: 19.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "jjpynvzheswgatyq", tierjAHncalGetDiamond: 29400, tierjAHncalPrice: 49.99),
+    tierjAHncalKeyId: "qnrcuelbtiuflyky", tierjAHncalGetDiamond: 29400, tierjAHncalPrice: 49.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "wkeiyyvplztyvhhk", tierjAHncalGetDiamond: 63700, tierjAHncalPrice: 99.99)
+    tierjAHncalKeyId: "ymohxnvpkqxutvab", tierjAHncalGetDiamond: 63700, tierjAHncalPrice: 99.99)
 ]
 
 enum IwhanxaPurchaseResult {
@@ -57,11 +81,18 @@ class IwhanxaIAPManager: NSObject, ObservableObject {
     }
     
     private var iwhanxaRetryCount = 0
-    private let iwhanxaMaxRetryCount = 10
+    private var iwhanxaTotalRequestCount = 0
+    private let iwhanxaMaxTotalRequestCount = 10
+    private var iwhanxaMaxRetryCount = 10
     private var iwhanxaIsRequesting = false
 
     // MARK: - 拉取商品
     func psieAJxaloietchProducts() {
+        
+        // ✅ 最大请求次数限制
+        guard iwhanxaTotalRequestCount < iwhanxaMaxTotalRequestCount else {
+            return
+        }
         
         // 防止重复请求
         guard !iwhanxaIsRequesting else { return }
@@ -70,6 +101,7 @@ class IwhanxaIAPManager: NSObject, ObservableObject {
         guard xcmnueProducnsts.isEmpty else { return }
         
         iwhanxaIsRequesting = true
+        iwhanxaTotalRequestCount += 1   // ✅ 每次请求都+1
         
         let ids = Set(alkwjAJeiwnbgProducts.map { $0.tierjAHncalKeyId })
         
@@ -80,7 +112,7 @@ class IwhanxaIAPManager: NSObject, ObservableObject {
 
     // MARK: - 购买
     func bneualIWlaRecharge(
-            _ lwhancxaPro: IwhanxaProduct,
+        _ productKeyId: String,
             completion: @escaping (IwhanxaPurchaseResult) -> Void
         ) {
             guard SKPaymentQueue.canMakePayments() else {
@@ -88,7 +120,7 @@ class IwhanxaIAPManager: NSObject, ObservableObject {
                 return
             }
             
-            guard let product = xcmnueProducnsts.first(where: { $0.productIdentifier == lwhancxaPro.tierjAHncalKeyId }) else {
+            guard let product = xcmnueProducnsts.first(where: { $0.productIdentifier == productKeyId }) else {
                 completion(.failed(message: "Product not found"))
                 return
             }
@@ -135,14 +167,15 @@ extension IwhanxaIAPManager: SKProductsRequestDelegate {
     
     private func iwhanxaRetryFetch() {
         
-        guard iwhanxaRetryCount < iwhanxaMaxRetryCount else {
-            DwhaiXeuHUD.toast(.error("Load products failed"))
+        iwhanxaRetryCount += 1
+        iwhanxaTotalRequestCount += 1   // ✅ 只在失败时累计
+        
+        guard iwhanxaRetryCount < iwhanxaMaxRetryCount,
+              iwhanxaTotalRequestCount < iwhanxaMaxTotalRequestCount else {
             return
         }
         
-        iwhanxaRetryCount += 1
-        
-        let delay = pow(2.0, Double(iwhanxaRetryCount)) // 指数退避（2,4,8秒）
+        let delay = pow(2.0, Double(iwhanxaRetryCount))
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.psieAJxaloietchProducts()
@@ -152,6 +185,19 @@ extension IwhanxaIAPManager: SKProductsRequestDelegate {
 
 extension IwhanxaIAPManager: SKPaymentTransactionObserver {
     
+    private func findWalletItem(productID: String) -> IwhanxaProduct? {
+        alkwjAJeiwnbgProducts.first { $0.tierjAHncalKeyId == productID }
+    }
+    
+    // MARK: - Facebook 埋点
+    private func peiaWUkAKwuFBLog(price: Double) {
+        AppEvents.shared.logPurchase(
+            amount: price,
+            currency: "USD",
+            parameters: [AppEvents.ParameterName(rawValue: "fb_mobile_purchase"): "true"]
+        )
+    }
+    
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         
         for transaction in transactions {
@@ -159,15 +205,53 @@ extension IwhanxaIAPManager: SKPaymentTransactionObserver {
             switch transaction.transactionState {
                 
             case .purchased:
-                SKPaymentQueue.default().finishTransaction(transaction)
-                DwhaiXeuHUD.hideLoading()
-                
-                if let lwhancxaPro = alkwjAJeiwnbgProducts.first(where: {
-                    $0.tierjAHncalKeyId == transaction.payment.productIdentifier
-                }) {
-                    cjehALuwnxCompeltion?(.success(diamond: lwhancxaPro.tierjAHncalGetDiamond))
+                guard let model = findWalletItem(productID: transaction.payment.productIdentifier) else {
+                    DwhaiXeuHUD.toast(.error("Product config not found"))
+                    SKPaymentQueue.default().finishTransaction(transaction)
+                    DwhaiXeuHUD.hideLoading()
+                    return
                 }
-                cjehALuwnxCompeltion = nil
+                if WqigjxAkjjglriAppStorage.wqigjxAkjjglriIsB {
+                    Task{
+                        let xiwalAWInxclakPurId = transaction.transactionIdentifier ?? ""
+                        let cueAKwukfalVerificationData: String
+                        if let receiptURL = Bundle.main.appStoreReceiptURL,
+                           let receiptData = try? Data(contentsOf: receiptURL)
+                        {
+                            cueAKwukfalVerificationData = receiptData.base64EncodedString()
+                        } else {
+                            cueAKwukfalVerificationData = ""
+                        }
+                        let siueAKLuwxjeiVertify = try await GhsuqJduwApiCall().ghsuqJduwPayCall(
+                            purchaseID: xiwalAWInxclakPurId,
+                            serverVerificationData: cueAKwukfalVerificationData,  // StoreKit1 没有 JWS，通常传空或自签
+                            orderCode: pwoaixAcxwisUsersOrdercode
+                        )
+
+                        if siueAKLuwxjeiVertify {
+                            peiaWUkAKwuFBLog(price: model.tierjAHncalPrice) // fb
+                            await UwhxAUBSKAdjustManager.shared.slwinxAiuwnTrackPurchase(dollar: model.tierjAHncalPrice) // adjust
+                            SKPaymentQueue.default().finishTransaction(transaction)
+                            DwhaiXeuHUD.toast(.success("Purchase success"))
+                        } else {
+                            SKPaymentQueue.default().finishTransaction(transaction)
+                            DwhaiXeuHUD.toast(.error("Purchase unverified"))
+                        }
+
+                        DwhaiXeuHUD.hideLoading()
+                    }
+                }else {
+                    SKPaymentQueue.default().finishTransaction(transaction)
+                    DwhaiXeuHUD.hideLoading()
+                    
+                    if let lwhancxaPro = alkwjAJeiwnbgProducts.first(where: {
+                        $0.tierjAHncalKeyId == transaction.payment.productIdentifier
+                    }) {
+                        cjehALuwnxCompeltion?(.success(diamond: lwhancxaPro.tierjAHncalGetDiamond))
+                    }
+                    cjehALuwnxCompeltion = nil
+                }
+                
                 
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)

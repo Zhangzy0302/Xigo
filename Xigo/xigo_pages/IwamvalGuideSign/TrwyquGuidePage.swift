@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct TrwyquGuidePage: View {
+    @StateObject private var trwyquInitMedel: EwuxbakAUkxBInitVModel = EwuxbakAUkxBInitVModel()
+    @StateObject private var trawuLocation: UxyqhHhwiaLocationManager = UxyqhHhwiaLocationManager.shared
+    
     @AppStorage("ywxmhaiwIsAgree") var tryajkIsAgree: Bool = false
     @EnvironmentObject var tywiazmNavi: UxzuaNaaviManer
     @EnvironmentObject var tywaizUserVM: XawuxLAiwMUSerViewModel
+    
     
     @State private var trwyquIsShowEula: Bool = false
     
@@ -36,19 +40,99 @@ struct TrwyquGuidePage: View {
                         .frame(width: 176, height: 203)
                         .padding(.leading, 8)
                     Spacer()
-                    Text("EULA")
-                        .font(XigexcTheme.XigoFont.xiabalMainFont(18, weight: .regular))
-                        .foregroundColor(.black)
-                        .frame(width: 81, height: 34)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.white)
-                        ).onTapGesture {
-                            trwyquIsShowEula = true
-                        }.padding(.top, 12)
-                        .padding(.trailing, 20)
+                    if trwyquInitMedel.pwoaixAcxwisStatus == .ncjjalAiwlisA {
+                        Text("EULA")
+                            .font(XigexcTheme.XigoFont.xiabalMainFont(18, weight: .regular))
+                            .foregroundColor(.black)
+                            .frame(width: 81, height: 34)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(.white)
+                            ).onTapGesture {
+                                trwyquIsShowEula = true
+                            }.padding(.top, 12)
+                            .padding(.trailing, 20)
+                    }
+                    
                 }
                 Spacer()
+                switch trwyquInitMedel.pwoaixAcxwisStatus {
+                case .loading:
+                    VStack(spacing: 40) {
+                      ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(2)
+                        .tint(.white)
+
+                      Text("Loading...")
+                            .font(XigexcTheme.XigoFont.xiabalMainFont(16))
+                            .foregroundColor(.white)
+                    }.padding(.bottom, 60)
+                case .ncjjalAiwlisB:
+                    Button(action: {
+                        Task {
+                            trwyquInitMedel.pwoaixAcxwisStatus = .loading
+                          if let route = await EuxnalvAiwInitUtils.shared.pwoaixAcxwisGoLogin() {
+
+                            await MainActor.run {
+                                tywiazmNavi.popToRoot()
+                                tywiazmNavi.push(route)
+                            }
+                          }
+                            trwyquInitMedel.pwoaixAcxwisStatus = .ncjjalAiwlisB
+                        }
+                    }) {
+                        RadialGradient(colors: [
+                            Color(red: 1, green: 128 / 255, blue: 200 / 255),
+                            .white
+                        ], center: .center,startRadius: 0, endRadius: 30)
+                        .frame(width: 242, height: 62)
+                        .scaleEffect(x: 4.0, y: 1.0, anchor: .center)
+                            .cornerRadius(33)
+                            .shadow(color: .black, radius: 0, x: 0, y: 3 )
+                            .overlay{
+                                HStack{
+                                    Image("klahgw_sign_email")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    Text("Quick Login")
+                                        .font(XigexcTheme.XigoFont.xiabalMainFont(16, weight: .black))
+                                        .foregroundColor(.black)
+                                        .frame(maxWidth: .infinity)
+                                }.padding(.horizontal, 29)
+                            }
+                    }.padding(.bottom, 60)
+                case .ncjjalAiwlisA:
+                    TrwyquGuideToA(trwyquIsShowEula: $trwyquIsShowEula)
+                }
+            }
+            
+            XigOUWnalAHlkskDialog(xigousIsShow: $trwyquIsShowEula) {
+                YqalhhEULA(yqalhhIsShow: $trwyquIsShowEula)
+            }
+            XigOUWnalAHlkskDialog(xigousIsShow: $trawuLocation.showLocationDialog){
+                APwixnUwLocationAl(erunxAKwlwqIsShow: $trawuLocation.showLocationDialog)
+            }
+        }.navigationBarHidden(true)
+            .environmentObject(trwyquInitMedel)
+            .task{
+                await trwyquInitMedel.arieAkdliwaBInit()
+            }.onChange(of: trwyquInitMedel.pwoaixAcxwisNextRoute) { route in
+                if let route = route {
+                  tywiazmNavi.push(route)
+                    trwyquInitMedel.pwoaixAcxwisNextRoute = nil  // 防止重复跳转
+                }
+              }
+    }
+    
+    struct TrwyquGuideToA: View {
+        @Binding var trwyquIsShowEula: Bool
+        @AppStorage("ywxmhaiwIsAgree") var tryajkIsAgree: Bool = false
+        @EnvironmentObject var tywiazmNavi: UxzuaNaaviManer
+        @EnvironmentObject var tywaizUserVM: XawuxLAiwMUSerViewModel
+        
+        var body: some View {
+            VStack{
                 VStack(spacing: 30){
                     RadialGradient(colors: [
                         Color(red: 1, green: 128 / 255, blue: 200 / 255),
@@ -175,11 +259,6 @@ struct TrwyquGuidePage: View {
                     
                 }.padding(.bottom, 34)
             }
-            
-            XigOUWnalAHlkskDialog(xigousIsShow: $trwyquIsShowEula) {
-                YqalhhEULA(yqalhhIsShow: $trwyquIsShowEula)
-            }
-        }.navigationBarHidden(true)
-        
+        }
     }
 }
