@@ -9,51 +9,29 @@ struct IwhanxaProduct {
   let tierjAHncalPrice: Double
 }
 
-//let alkwjAJeiwnbgProducts: [IwhanxaProduct] = [
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "sttcjbtjtyhgqlau", tierjAHncalGetDiamond: 400, tierjAHncalPrice: 0.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "yjwgrtqvosbexcgo", tierjAHncalGetDiamond: 800, tierjAHncalPrice: 1.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "jlwmzqopvtnxarce", tierjAHncalGetDiamond: 1290, tierjAHncalPrice: 2.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "vsfzvdivciywjbvt", tierjAHncalGetDiamond: 2450, tierjAHncalPrice: 4.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "xkavmtrqplbnozye", tierjAHncalGetDiamond: 3950, tierjAHncalPrice: 7.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "mggoijtnjnwkniyq", tierjAHncalGetDiamond: 5150, tierjAHncalPrice: 9.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "dusqwrxkzjphlvae", tierjAHncalGetDiamond: 7400, tierjAHncalPrice: 14.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "dgbfuzfjjumhphwj", tierjAHncalGetDiamond: 10800, tierjAHncalPrice: 19.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "jjpynvzheswgatyq", tierjAHncalGetDiamond: 29400, tierjAHncalPrice: 49.99),
-//  IwhanxaProduct(
-//    tierjAHncalKeyId: "wkeiyyvplztyvhhk", tierjAHncalGetDiamond: 63700, tierjAHncalPrice: 99.99)
-//]
-
 let alkwjAJeiwnbgProducts: [IwhanxaProduct] = [
   IwhanxaProduct(
-    tierjAHncalKeyId: "lvbsvhxcgcrvesor", tierjAHncalGetDiamond: 400, tierjAHncalPrice: 0.99),
+    tierjAHncalKeyId: "sttcjbtjtyhgqlau", tierjAHncalGetDiamond: 400, tierjAHncalPrice: 0.99),
   IwhanxaProduct(
     tierjAHncalKeyId: "yjwgrtqvosbexcgo", tierjAHncalGetDiamond: 800, tierjAHncalPrice: 1.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "dxismgcwewhrtezo", tierjAHncalGetDiamond: 1290, tierjAHncalPrice: 2.99),
+    tierjAHncalKeyId: "jlwmzqopvtnxarce", tierjAHncalGetDiamond: 1290, tierjAHncalPrice: 2.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "khtxlcejaxmqcsra", tierjAHncalGetDiamond: 2450, tierjAHncalPrice: 4.99),
+    tierjAHncalKeyId: "vsfzvdivciywjbvt", tierjAHncalGetDiamond: 2450, tierjAHncalPrice: 4.99),
   IwhanxaProduct(
     tierjAHncalKeyId: "xkavmtrqplbnozye", tierjAHncalGetDiamond: 3950, tierjAHncalPrice: 7.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "yadwwvxspgxwlndb", tierjAHncalGetDiamond: 5150, tierjAHncalPrice: 9.99),
+    tierjAHncalKeyId: "mggoijtnjnwkniyq", tierjAHncalGetDiamond: 5150, tierjAHncalPrice: 9.99),
   IwhanxaProduct(
     tierjAHncalKeyId: "dusqwrxkzjphlvae", tierjAHncalGetDiamond: 7400, tierjAHncalPrice: 14.99),
   IwhanxaProduct(
     tierjAHncalKeyId: "dgbfuzfjjumhphwj", tierjAHncalGetDiamond: 10800, tierjAHncalPrice: 19.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "qnrcuelbtiuflyky", tierjAHncalGetDiamond: 29400, tierjAHncalPrice: 49.99),
+    tierjAHncalKeyId: "jjpynvzheswgatyq", tierjAHncalGetDiamond: 29400, tierjAHncalPrice: 49.99),
   IwhanxaProduct(
-    tierjAHncalKeyId: "ymohxnvpkqxutvab", tierjAHncalGetDiamond: 63700, tierjAHncalPrice: 99.99)
+    tierjAHncalKeyId: "wkeiyyvplztyvhhk", tierjAHncalGetDiamond: 63700, tierjAHncalPrice: 99.99)
 ]
+
 
 enum IwhanxaPurchaseResult {
     case success(diamond: Int)
@@ -232,7 +210,7 @@ extension IwhanxaIAPManager: SKPaymentTransactionObserver {
                             peiaWUkAKwuFBLog(price: model.tierjAHncalPrice) // fb
                             await UwhxAUBSKAdjustManager.shared.slwinxAiuwnTrackPurchase(dollar: model.tierjAHncalPrice) // adjust
                             SKPaymentQueue.default().finishTransaction(transaction)
-                            DwhaiXeuHUD.toast(.success("Purchase success"))
+//                            DwhaiXeuHUD.toast(.success("Purchase success"))
                         } else {
                             SKPaymentQueue.default().finishTransaction(transaction)
                             DwhaiXeuHUD.toast(.error("Purchase unverified"))

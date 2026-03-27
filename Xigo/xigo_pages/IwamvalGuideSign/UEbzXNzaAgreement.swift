@@ -5,15 +5,13 @@ import ScreenShield
 struct AXaixlkalAJxlpWebView: UIViewRepresentable {
 
     let urlString: String
+    let bridge: WebViewBridge   // 外部传进来//2026.3.24(openBrowser事件修改)
     var onLoadingStart: (() -> Void)?
     var onLoadingFinish: ((Int) -> Void)?
     var onClose: (() -> Void)?
     var onRecharge: ((String, String) -> Void)?
-
-    func makeCoordinator() -> Coordinator {
-      Coordinator(self)
-    }
-
+    var onopenBrowser: ((String) -> Void)? //urlString
+    
     func makeUIView(context: Context) -> WKWebView {
 
       let config = WKWebViewConfiguration()
@@ -41,15 +39,21 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
       // 网页内左滑返回
       webView.allowsBackForwardNavigationGestures = true
 
-      // ✅ 直接用 urlString
-      if let url = URL(string: urlString) {
-        webView.load(URLRequest(url: url))
-      }
-
+        bridge.webView = webView
       return webView
     }
 
-    func updateUIView(_ webView: WKWebView, context: Context) {
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        guard let url = URL(string: urlString) else { return }
+
+        // ✅ 防止重复加载
+        if uiView.url?.absoluteString != url.absoluteString {
+            uiView.load(URLRequest(url: url))
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+      Coordinator(self)
     }
 
     @MainActor
@@ -61,7 +65,7 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
       init(_ parent: AXaixlkalAJxlpWebView) {
         self.parent = parent
       }
-
+        
       // MARK: - 加载开始
       func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         startTime = Date()
@@ -85,7 +89,6 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
             if let url = navigationAction.request.url,
                let scheme = url.scheme?.lowercased(),
                scheme != "http" && scheme != "https" && scheme != "file" && scheme != "about" {
-                
                 UIApplication.shared.open(url, options: [:]) { [weak webView] success in
                     let state = success ? "success" : "failed"
                     let js = """
@@ -120,12 +123,19 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
                 || url.scheme == "itms-services"
                 || urlString.contains("apps.apple.com")
             {
+                if let url = URL(string: urlString),
+                   UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                } else {
+                    print("No UPI app installed")
+                }
                 DispatchQueue.main.async {
                     UIApplication.shared.open(url)
                 }
                 return nil
             }
-
+            webView.load(URLRequest(url: url))
+            print(UIApplication.shared.canOpenURL(URL(string: "upi://pay")!))
             return nil
         }
 
@@ -168,17 +178,9 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
                   urlString = str
               }
 
-              guard var urlString else { return }
+              guard let urlString else { return }
 
-              if !urlString.hasPrefix("http") {
-                  urlString = "https://" + urlString
-              }
-
-              if let url = URL(string: urlString) {
-                  DispatchQueue.main.async {
-                      UIApplication.shared.open(url)
-                  }
-              }
+              parent.onopenBrowser?(urlString)
           }
            
       }
@@ -188,19 +190,25 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
 
 }
 
+class WebViewBridge: ObservableObject {
+    weak var webView: WKWebView?
+    
+}//2026.3.24(openBrowser事件修改)
+
 struct UEbzXNzaAgreement: View {
     let urbzlxxnWebUrl: String
     
     @EnvironmentObject var ueabvazjIpaWallet: IwhanxaIAPManager
     @EnvironmentObject var ureanxaXigNavi: UxzuaNaaviManer
     
-    @State private var loadingProgress: Double = 0
-    @State private var isLoading: Bool = true
+//    @State private var isLoading: Bool = true
+    
+    @StateObject private var bridge = WebViewBridge()//2026.3.24(openBrowser事件修改)
     
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea()
-            if WqigjxAkjjglriAppStorage.wqigjxAkjjglriIsB && isLoading {
+            if WqigjxAkjjglriAppStorage.wqigjxAkjjglriIsB && !DwhaiXeuLoadingToast.shared.dwahuxnIsLoading {
                 GeometryReader { geo in
                     Image("klahgw_guide_pabg")
                         .resizable()
@@ -222,12 +230,15 @@ struct UEbzXNzaAgreement: View {
                 
                 AXaixlkalAJxlpWebView(
                     urlString: urbzlxxnWebUrl,
+                    bridge: bridge,
                       onLoadingStart: {
-                        isLoading = true
+//                        isLoading = true
+                          DwhaiXeuHUD.showLoading()
                       },
                       onLoadingFinish: { duration in
-                        isLoading = false
-
+                          DwhaiXeuHUD.hideLoading()
+//                        isLoading = false
+                          
                         if WqigjxAkjjglriAppStorage.wqigjxAkjjglriIsB {
                           Task {
                             try await GhsuqJduwApiCall()
@@ -256,23 +267,40 @@ struct UEbzXNzaAgreement: View {
                                 }
                             }
                         }
-                      }
+                      },
+                    onopenBrowser: { urlString in
+                        //打开原生浏览器事件//2026.3.24(openBrowser事件修改)
+                        if let url = URL(string: urlString) {
+                                
+                                UIApplication.shared.open(url, options: [:]) { success in
+                                    let state = success ? "success" : "failed"
+                                    let js = """
+                                        window.dispatchEvent(new CustomEvent('nativeOpenState', {
+                                            detail: { state: '\(state)', url: '\(url.absoluteString)' }
+                                        }));
+                                        """
+                                    DispatchQueue.main.async {
+                                        bridge.webView?.evaluateJavaScript(js, completionHandler: nil)
+                                    }
+                                }
+                            }
+                    }
                 ).ignoresSafeArea()
             }
-            if isLoading {
-
-              VStack(spacing: 30) {
-                  Spacer()
-                ProgressView()
-                  .scaleEffect(1.5)
-                  .tint(.white)
-
-                Text("loading...")
-                      .font(XigexcTheme.XigoFont.xiabalMainFont(16))
-                  .foregroundColor(.white)
-              }
-              .padding(.bottom, 100)
-            }
+//            if DwhaiXeuLoadingToast.shared.dwahuxnIsLoading {
+//
+//              VStack(spacing: 30) {
+//                  Spacer()
+//                ProgressView()
+//                  .scaleEffect(1.5)
+//                  .tint(.white)
+//
+//                Text("loading...")
+//                      .font(XigexcTheme.XigoFont.xiabalMainFont(16))
+//                  .foregroundColor(.white)
+//              }
+//              .padding(.bottom, 100)
+//            }
         }.navigationBarHidden(true)
             .background(
                 Group{
