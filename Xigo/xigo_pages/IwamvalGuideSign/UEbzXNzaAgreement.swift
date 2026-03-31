@@ -40,16 +40,15 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
       webView.allowsBackForwardNavigationGestures = true
 
         bridge.webView = webView
+        
+        // ✅ 只在这里加载一次
+        if let url = URL(string: urlString) {
+            webView.load(URLRequest(url: url))
+        }
       return webView
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        guard let url = URL(string: urlString) else { return }
-
-        // ✅ 防止重复加载
-        if uiView.url?.absoluteString != url.absoluteString {
-            uiView.load(URLRequest(url: url))
-        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -201,7 +200,7 @@ struct UEbzXNzaAgreement: View {
     @EnvironmentObject var ueabvazjIpaWallet: IwhanxaIAPManager
     @EnvironmentObject var ureanxaXigNavi: UxzuaNaaviManer
     
-//    @State private var isLoading: Bool = true
+    @State private var isLoading: Bool = true
     
     @StateObject private var bridge = WebViewBridge()//2026.3.24(openBrowser事件修改)
     
@@ -232,12 +231,12 @@ struct UEbzXNzaAgreement: View {
                     urlString: urbzlxxnWebUrl,
                     bridge: bridge,
                       onLoadingStart: {
-//                        isLoading = true
-                          DwhaiXeuHUD.showLoading()
+                        isLoading = true
+//                          DwhaiXeuHUD.showLoading()
                       },
                       onLoadingFinish: { duration in
-                          DwhaiXeuHUD.hideLoading()
-//                        isLoading = false
+//                          DwhaiXeuHUD.hideLoading()
+                        isLoading = false
                           
                         if WqigjxAkjjglriAppStorage.wqigjxAkjjglriIsB {
                           Task {
@@ -287,20 +286,20 @@ struct UEbzXNzaAgreement: View {
                     }
                 ).ignoresSafeArea()
             }
-//            if DwhaiXeuLoadingToast.shared.dwahuxnIsLoading {
-//
-//              VStack(spacing: 30) {
-//                  Spacer()
-//                ProgressView()
-//                  .scaleEffect(1.5)
-//                  .tint(.white)
-//
-//                Text("loading...")
-//                      .font(XigexcTheme.XigoFont.xiabalMainFont(16))
-//                  .foregroundColor(.white)
-//              }
-//              .padding(.bottom, 100)
-//            }
+            if DwhaiXeuLoadingToast.shared.dwahuxnIsLoading {
+
+              VStack(spacing: 30) {
+                  Spacer()
+                ProgressView()
+                  .scaleEffect(1.5)
+                  .tint(.white)
+
+                Text("loading...")
+                      .font(XigexcTheme.XigoFont.xiabalMainFont(16))
+                  .foregroundColor(.white)
+              }
+              .padding(.bottom, 100)
+            }
         }.navigationBarHidden(true)
             .background(
                 Group{

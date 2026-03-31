@@ -14,7 +14,7 @@ enum RaeyqZjxwaSecureKey {
 
     var key: String {
         switch self {
-        case .raeyqZjxwaDevid: return "raeyqZjxwaDevid"
+        case .raeyqZjxwaDevid: return "raeyqZjxwaDevid1"
         case .password: return "password"
         }
     }
