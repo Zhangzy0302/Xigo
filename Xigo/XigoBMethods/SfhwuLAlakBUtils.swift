@@ -117,7 +117,7 @@ class HxwuqHgeywcInformationCreate {
     static let pwoaixAcxwisH5UrlrmationVersion: String = "1.3.0"
     
     static let pwoaixAcxwisVertifyDate: DateComponents = DateComponents(
-        year: 2026, month: 4, day: 1, hour: 12
+        year: 2026, month: 4, day: 2, hour: 12
       )
 
   static func pwoaixAcxwisBuildH5Url(baseUrl: String, token: String) -> String {

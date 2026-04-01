@@ -26,7 +26,6 @@ enum UxzuaAppRoute: Hashable {
     // chat
     case tudaaWLjMessagePage
     case mznajucChatRoom(mzanRoomId: Int)
-    case aOjxeuaAlVideoChat(chatUserId: Int)
     
     // ai
     case tteaijzaAICustomized
@@ -90,8 +89,8 @@ struct UxzuaXigoRouterStack: View {
                         MznaujucChatRoom(mznaujucRoomId: mzanRoomId)
                     case .tudaaWLjMessagePage:
                         TudaaWLjMessagePage()
-                    case .aOjxeuaAlVideoChat(let chatUserId):
-                        AOjxeuALVideoChat(aojuexChatUserID: chatUserId)
+//                    case .aOjxeuaAlVideoChat(let chatUserId):
+//                        AOjxeuALVideoChat(aojuexChatUserID: chatUserId)
                         
                     // ai
                     case .tteaijzaAICustomized:

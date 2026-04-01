@@ -52,12 +52,12 @@ struct MznaujucChatRoom: View {
                             }
                             
                             Spacer()
-                            Image("ejqiohxkaJ")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .onTapGesture {
-                                    mznauNaiv.push(.aOjxeuaAlVideoChat(chatUserId: mznauUser.xawuxLAiwMUserId))
-                                }
+//                            Image("ejqiohxkaJ")
+//                                .resizable()
+//                                .frame(width: 30, height: 30)
+//                                .onTapGesture {
+//                                    mznauNaiv.push(.aOjxeuaAlVideoChat(chatUserId: mznauUser.xawuxLAiwMUserId))
+//                                }
                             PhotosPicker(
                                 selection: $runUDwalsjImagePickerItem,
                                 matching: .images
