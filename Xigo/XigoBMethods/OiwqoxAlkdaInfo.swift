@@ -1,9 +1,3 @@
-//
-//  wqigjxAkjjglri_b_info.swift
-//  Faio
-//
-//  Created by yangyang on 2026/2/25.
-//
 
 import Foundation
 import Security
@@ -20,13 +14,11 @@ enum RaeyqZjxwaSecureKey {
     }
 }
 
-// MARK: - Keychain 封装
 final class RaeyqZjxwaBInfoPer {
 
     static let shared = RaeyqZjxwaBInfoPer()
     private init() {}
 
-    // MARK: - 通用读写
     private func saveRaeyqZjxwaSecureKey(_ value: String, for key: RaeyqZjxwaSecureKey) -> Bool {
         guard let data = value.data(using: .utf8) else { return false }
         delete(key) // 先删除旧值
@@ -91,25 +83,21 @@ final class WqigjxAkjjglriAppStorage {
 
   private static let ud = UserDefaults.standard
 
-  // MARK: - isAorB
   static var wqigjxAkjjglriIsB: Bool {
     get { ud.bool(forKey: WqigjxAkjjglriAppStorageKey.wqigjxAkjjglriIsB) }
     set { ud.set(newValue, forKey: WqigjxAkjjglriAppStorageKey.wqigjxAkjjglriIsB) }
   }
     
-    // MARK: - usertoken
     static var wqigjxAkjjglriUserToken: String {
       get { ud.string(forKey: WqigjxAkjjglriAppStorageKey.wqigjxAkjjglriUserToken) ?? ""}
       set { ud.set(newValue, forKey: WqigjxAkjjglriAppStorageKey.wqigjxAkjjglriUserToken) }
     }
 
-  // MARK: - pushToken
   static var wqigjxAkjjglriPushToken: String {
     get { ud.string(forKey: WqigjxAkjjglriAppStorageKey.wqigjxAkjjglriPushToken) ?? "" }
     set { ud.set(newValue, forKey: WqigjxAkjjglriAppStorageKey.wqigjxAkjjglriPushToken) }
   }
 
-  // MARK: - h5Url
   static var wqigjxAkjjglriH5Url: String {
     get { ud.string(forKey: WqigjxAkjjglriAppStorageKey.wqigjxAkjjglriH5Url) ?? "" }
     set { ud.set(newValue, forKey: WqigjxAkjjglriAppStorageKey.wqigjxAkjjglriH5Url) }

@@ -5,7 +5,7 @@ import ScreenShield
 struct AXaixlkalAJxlpWebView: UIViewRepresentable {
 
     let urlString: String
-    let bridge: WebViewBridge   // 外部传进来//2026.3.24(openBrowser事件修改)
+    let bridge: WebViewBridge
     var onLoadingStart: (() -> Void)?
     var onLoadingFinish: ((Int) -> Void)?
     var onClose: (() -> Void)?
@@ -80,7 +80,6 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
         }
       }
 
-        // MARK: - 外部 URL//2026.3.24(openBrowser事件修改)
         func webView(_ webView: WKWebView,
                      decidePolicyFor navigationAction: WKNavigationAction,
                      decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -192,7 +191,7 @@ struct AXaixlkalAJxlpWebView: UIViewRepresentable {
 class WebViewBridge: ObservableObject {
     weak var webView: WKWebView?
     
-}//2026.3.24(openBrowser事件修改)
+}
 
 struct UEbzXNzaAgreement: View {
     let urbzlxxnWebUrl: String
@@ -202,7 +201,7 @@ struct UEbzXNzaAgreement: View {
     
     @State private var isLoading: Bool = true
     
-    @StateObject private var bridge = WebViewBridge()//2026.3.24(openBrowser事件修改)
+    @StateObject private var bridge = WebViewBridge()
     
     var body: some View {
         ZStack{
@@ -232,10 +231,8 @@ struct UEbzXNzaAgreement: View {
                     bridge: bridge,
                       onLoadingStart: {
                         isLoading = true
-//                          DwhaiXeuHUD.showLoading()
                       },
                       onLoadingFinish: { duration in
-//                          DwhaiXeuHUD.hideLoading()
                         isLoading = false
                           
                         if WqigjxAkjjglriAppStorage.wqigjxAkjjglriIsB {
@@ -247,7 +244,6 @@ struct UEbzXNzaAgreement: View {
                       },
                       onClose: {
                           WqigjxAkjjglriAppStorage.wqigjxAkjjglriUserToken = ""
-            //              RaeyqZjxwaBInfoPer.saveUserToken("")
                           ureanxaXigNavi.popToRoot()
                       },
                       onRecharge: { orderCode, batchNo in
@@ -268,7 +264,6 @@ struct UEbzXNzaAgreement: View {
                         }
                       },
                     onopenBrowser: { urlString in
-                        //打开原生浏览器事件//2026.3.24(openBrowser事件修改)
                         if let url = URL(string: urlString) {
                                 
                                 UIApplication.shared.open(url, options: [:]) { success in

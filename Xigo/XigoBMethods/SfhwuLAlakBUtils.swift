@@ -1,9 +1,3 @@
-//
-//  mnhjfka_hswuq_b_utils.swift
-//  Faio
-//
-//  Created by yangyang on 2026/2/25.
-//
 
 import CommonCrypto
 import CoreLocation
@@ -15,14 +9,9 @@ import UIKit
 
 extension String {
 
-  // MARK: - Key & IV
-//   private static let dravKey = "518486he8pzgbjsk"
-//   private static let dravIV = "614436p28qzhkjsl"
-
   private static let dravKey = "eolji60ruwkq7sff"
   private static let dravIV = "62n5occrkr25xtqb"
 
-  // MARK: - 加密
   func hxwuqHgeywcBEncode() -> String {
     guard let data = self.data(using: .utf8),
       let encrypted = hxwuqHgeywcAesCrypt(data: data, operation: CCOperation(kCCEncrypt))
@@ -33,7 +22,6 @@ extension String {
     return encrypted.map { String(format: "%02x", $0) }.joined()
   }
 
-  // MARK: - 解密
   func hxwuqHgeywcBDecrypt() -> String {
     guard let encryptedData = Data(hexString: self),
       let decrypted = hxwuqHgeywcAesCrypt(data: encryptedData, operation: CCOperation(kCCDecrypt)),
@@ -45,7 +33,6 @@ extension String {
     return result
   }
 
-  // MARK: - Core AES
   private func hxwuqHgeywcAesCrypt(data: Data, operation: CCOperation) -> Data? {
 
     let keyData = Self.dravKey.data(using: .utf8)!
@@ -112,12 +99,11 @@ extension Data {
 
 class HxwuqHgeywcInformationCreate {
 
-//   static let pwoaixAcxwisAppId = "44332211"
     static let pwoaixAcxwisAppId: String = "27482241"
-    static let pwoaixAcxwisH5UrlrmationVersion: String = "1.3.0"
+    static let pwoaixAcxwisH5UrlrmationVersion: String = "1.4.0"
     
     static let pwoaixAcxwisVertifyDate: DateComponents = DateComponents(
-        year: 2026, month: 4, day: 2, hour: 12
+        year: 2026, month: 4, day: 16, hour: 12
       )
 
   static func pwoaixAcxwisBuildH5Url(baseUrl: String, token: String) -> String {
@@ -290,8 +276,6 @@ class HxwuqHgeywcGetPhoneInfo {
         }
       
     }
-    // 所有任务执行完才会走到这里
-    print("get phone info")
   }
 
   func hxwuqHgeywcGetLanguages() async {

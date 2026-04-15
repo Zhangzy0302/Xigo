@@ -66,9 +66,7 @@ extension GhsuqJduwApiCall {
       "cjw383kajkjck": cjueuAxlkalPhoneInfo.keyboards,
       "debug": 1,
     ]
-    print("headers: \(headers)")
-    print(body)
-
+      
     return try await ghsuqJduwRequest(
       path: "/opi/v1/akjAKjdlcjuo",
       body: body
@@ -94,9 +92,6 @@ extension GhsuqJduwApiCall {
     if !RaeyqZjxwaBInfoPer.shared.password.isEmpty {
       body["jkAKjx829isd"] = RaeyqZjxwaBInfoPer.shared.password
     }
-
-//    print(body)
-//    print("headers: \(headers)")
 
     return try await ghsuqJduwRequest(
       path: "/opi/v1/xkjwA92uakcl",
